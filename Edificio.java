@@ -7,54 +7,48 @@ package ageofempires_parte1;
 
 /**
  *
- * @author crysa
+ * @author Cristina Alvarez Vales y María Trabazo Segura
  */
 public class Edificio {
-    
-     private String ciudadela;
-    private String casa;
-    private String cuartel;
+
+    private String tipo;
     private int puntosSalud;
     private int costeReparacion;
     private Recursos recurso;
-    
-    public Edificio(){
-        ciudadela = "Ciudadela";
-        casa = "Casa";
-        cuartel = "Cuartel";
-        puntosSalud=100;
-    }
-    
-    public Edificio(String valorCiudadela, String valorCasa, String valorCuartel, int puntosSalud, int costeReparacion){
-        ciudadela = valorCiudadela;
-        casa = valorCasa;
-        cuartel = valorCuartel;
-        this.puntosSalud=puntosSalud;
-        this.costeReparacion=costeReparacion;
+    private int capacidad;
+    private Posicion posicion;
+
+    public Edificio() {
+        if ("casa".equals(tipo)) {
+            puntosSalud = 400;
+            costeReparacion = 600;
+//            recurso.setMadera(100);
+//            recurso.setPiedra(200);
+//           capacidad = 20;
+        } else if ("cuartel".equals(tipo)) {
+            puntosSalud = 500;
+            costeReparacion = 700;
+//            recurso.setMadera(150);
+//            recurso.setPiedra(250);
+        } else if ("ciudadela".equals(tipo)) {
+            puntosSalud = 600;
+            costeReparacion = 700;
+//            recurso.setMadera(200);
+//            recurso.setPiedra(300);
+            capacidad = 10;
+        }
     }
 
-    public String getCiudadela() {
-        return ciudadela;
+    public Edificio(String tipo, int puntosSalud, int costeReparacion, Recursos recurso, int capacidad) {
+        this.tipo = tipo;
+        this.puntosSalud = puntosSalud;
+        this.costeReparacion = costeReparacion;
+        this.recurso = recurso;
+        this.capacidad = capacidad;
     }
 
-    public void setCiudadela(String valorCiudadela) {
-        ciudadela = valorCiudadela;
-    }
-
-    public String getCasa() {
-        return casa;
-    }
-
-    public void setCasa(String valorCasa) {
-        casa = valorCasa;
-    }
-
-    public String getCuartel() {
-        return cuartel;
-    }
-
-    public void setCuartel(String valorCuartel) {
-        cuartel = valorCuartel;
+    public String getTipo() {
+        return tipo;
     }
 
     public int getPuntosSalud() {
@@ -69,14 +63,30 @@ public class Edificio {
         return recurso;
     }
 
-    public void setPuntosSalud(int puntosSalud) {
-        if(puntosSalud==0){
-            System.out.println("No se puede reconstruir el edificio");
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public Posicion getPosicion() {
+        return posicion;
+    }
+
+    public void setTipo(String tipo) {
+        if (!"casa".equals(tipo) || !"ciudadela".equals(tipo) || !"cuartel".equals(tipo)) {
+            System.out.println("No hay personajes de este tipo");
+        } else {
+            this.tipo = tipo;
         }
-        else{
+
+    }
+
+    public void setPuntosSalud(int puntosSalud) {
+        if (puntosSalud == 0) {
+            System.out.println("No se puede reconstruir el edificio");
+        } else {
             this.puntosSalud = puntosSalud;
         }
-        
+
     }
 
     public void setCosteReparacion(int costeReparacion) {
@@ -85,48 +95,20 @@ public class Edificio {
 
     public void setRecurso(Recursos recurso) {
         this.recurso = recurso;
-    }
-    
-   /* private String ciudadela;
-    private String casa;
-    private String cuartel;
-    
-    
-    public Edificio(){
-        ciudadela = "Ciudadela";
-        casa = "Casa";
-        cuartel = "Cuartel";
-    }
-    
-    public Edificio(String valorCiudadela, String valorCasa, String valorCuartel){
-        ciudadela = valorCiudadela;
-        casa = valorCasa;
-        cuartel = valorCuartel;
+
     }
 
-    public String getCiudadela() {
-        return ciudadela;
+    public void setCapacidad(int capacidad) {
+        if("ciudadela".equals(tipo)){
+            if(capacidad > 10){
+                System.out.println("No se pueden crear más ciudadanos, no hay espacio en la ciudadela");
+            }
+            
+        }
+        this.capacidad = capacidad;
     }
 
-    public void setCiudadela(String valorCiudadela) {
-        ciudadela = valorCiudadela;
+    public void setPosicion(Posicion posicion) {
+        this.posicion = posicion;
     }
-
-    public String getCasa() {
-        return casa;
-    }
-
-    public void setCasa(String valorCasa) {
-        casa = valorCasa;
-    }
-
-    public String getCuartel() {
-        return cuartel;
-    }
-
-    public void setCuartel(String valorCuartel) {
-        cuartel = valorCuartel;
-    }*/
-    
-    
 }
