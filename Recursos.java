@@ -27,6 +27,10 @@ public class Recursos {
         comida = valorComida;
     }
     
+    public Integer getMadera() {
+        return madera;
+    }
+    
     public void setMadera(int valorMadera) {
         if(madera<0){
             System.out.println("El valor de la madera tiene que ser superior a 0");
@@ -63,29 +67,5 @@ public class Recursos {
         }
     }
 
-    /*public Integer getMadera() {
-        return madera;
-    }
-
-    public void setMadera(Integer valorMadera) {
-        madera = valorMadera;
-    }
-
-    public Integer getPiedra() {
-        return piedra;
-    }
-
-    public void setPiedra(Integer valorPiedra) {
-        piedra = valorPiedra;
-    }
-
-    public Integer getComida() {
-        return comida;
-    }
-
-    public void setComida(Integer valorComida) {
-        comida = valorComida;
-    }*/
-    
-    
+       
 }
