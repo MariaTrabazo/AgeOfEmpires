@@ -15,9 +15,8 @@ public class Mapa {
     
     ArrayList <ArrayList<Celda>> miMapa= new ArrayList<>();
 
-    public Mapa(int filas, int columnas) {
+      public Mapa(int filas, int columnas) {
         
-        if(miMapa.size()!=0){
             for(int i=0; i<filas; i++){
                 ArrayList <Celda> fila= new ArrayList<>();
                 miMapa.add(fila);
@@ -26,12 +25,15 @@ public class Mapa {
                     celdaAux.getPosicion().setX(i);
                     celdaAux.getPosicion().setY(j);
                     if(i==0 && j==1){//HAY QUE IR AÑADIENDO COSAS EN POSICIONES ALEATORIAS
+                        celdaAux.setTipo("pradera");
                         
                     }
-                    //fila.add(null);
+                    celdaAux.setTipo("pradera");
+                    fila.add(celdaAux);
                 }
+                
             }
-        }
+       
         
     }
     
