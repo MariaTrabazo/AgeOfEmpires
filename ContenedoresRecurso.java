@@ -17,14 +17,41 @@ public class ContenedoresRecurso {
     private int cantidadMadera;
     private int cantidadPiedra;
     private int cantidadComida;
+    
+    public ContenedoresRecurso(){
+        
+        if("cantera".equals(tipo)){
+            cantidadPiedra = 100;
+            recurso.setPiedra(cantidadPiedra);
+        }
+        if("bosque".equals(tipo)){
+            cantidadMadera = 100;
+            recurso.setMadera(cantidadMadera);
+        }
+        if("arbusto".equals(tipo)){
+            cantidadComida = 100;
+            recurso.setComida(cantidadComida);
+        }
+        posicion = new Posicion();
+        
+    }
 
-    public ContenedoresRecurso(String tipo, Recursos recurso, Posicion posicion, int cantidadMadera, int cantidadPiedra, int cantidadComida) {
+    public ContenedoresRecurso(String tipo, Posicion posicion, int cantidadMadera, int cantidadPiedra, int cantidadComida) {
         this.tipo = tipo;
-        this.recurso = recurso;
+        if("cantera".equals(tipo)){
+            this.cantidadPiedra = cantidadPiedra;
+            recurso.setPiedra(cantidadPiedra);
+         }   
+        if("bosque".equals(tipo)){
+            this.cantidadMadera = cantidadMadera;
+            recurso.setMadera(cantidadMadera);
+        }
+        if("arbusto".equals(tipo)){
+             this.cantidadComida = cantidadComida;
+             recurso.setComida(cantidadComida);
+        }
         this.posicion = posicion;
-        this.cantidadMadera = cantidadMadera;
-        this.cantidadPiedra = cantidadPiedra;
-        this.cantidadComida = cantidadComida;
+        
     }
 
     public String getTipo() {
