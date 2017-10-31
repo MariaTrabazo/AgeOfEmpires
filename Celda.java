@@ -17,10 +17,11 @@ public class Celda {
     private Personaje personaje;
     private String tipo;
 
-    public Celda() {
-        this.posicion = posicion;
-        this.contenedor = contenedor;
-        this.edificio = edificio;
+   public Celda() {
+        this.posicion = new Posicion();
+        this.contenedor = null;
+        this.personaje = null;
+        this.edificio = null;
         this.tipo = "pradera";
     }
 
