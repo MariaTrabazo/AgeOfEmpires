@@ -201,6 +201,27 @@ public class Mapa {
       System.out.println(devolverMapa);
     }
         
+    public Personaje listarPersonajes(String nombre){
+        Personaje personajeResultado=null;
+        for(String key: listaPersonajes.keySet()){
+            personajeResultado=listaPersonajes.get(key);
+            if(personajeResultado.getNombre().equals(nombre)){
+                return personajeResultado;
+            }
+        }
+        return null;
+    }
+    
+    public Edificio listarEdificios(String nombre){
+        Edificio edificioResultado=null;
+        for(String key: listaEdificios.keySet()){
+            edificioResultado=listaEdificios.get(key);
+            if(edificioResultado.getNombre().equals(nombre)){
+                return edificioResultado;
+            }
+        }
+        return null;
+    }
         
     }
     
