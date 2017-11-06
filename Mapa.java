@@ -201,26 +201,44 @@ public class Mapa {
       System.out.println(devolverMapa);
     }
         
-    public Personaje listarPersonajes(String nombre){
+    public void listarPersonajes(){
         Personaje personajeResultado=null;
         for(String key: listaPersonajes.keySet()){
             personajeResultado=listaPersonajes.get(key);
-            if(personajeResultado.getNombre().equals(nombre)){
-                return personajeResultado;
-            }
+            System.out.println(personajeResultado.getNombre() + " " + personajeResultado.getPosicion());
+            
         }
-        return null;
+        
     }
     
-    public Edificio listarEdificios(String nombre){
+    public void listarEdificios(){
         Edificio edificioResultado=null;
-        for(String key: listaEdificios.keySet()){
+         for(String key: listaEdificios.keySet()){
             edificioResultado=listaEdificios.get(key);
-            if(edificioResultado.getNombre().equals(nombre)){
-                return edificioResultado;
+            System.out.println(edificioResultado.getNombre() + " " + edificioResultado.getPosicion());
+            
+        }
+        
+    }
+    
+    public void describirCelda (String nombre){
+        Celda celdaAuxiliar=new Celda();
+        
+        for(int i=0; i<miMapa.size(); i++){
+            for(int j=0; j<miMapa.get(0).size(); j++){
+                celdaAuxiliar=miMapa.get(i).get(j);
+                if(celdaAuxiliar.getContenedor().getNombre().equals(parseInt(nombre))){
+                   
+                   
+                }
+                else if(celdaAuxiliar.getEdificio().getNombre().equals(nombre)){
+                    
+                }
+                else if(celdaAuxiliar.getPersonaje().equals(nombre)){
+                    
+                }
             }
         }
-        return null;
     }
         
     }
