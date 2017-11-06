@@ -111,4 +111,21 @@ public class Edificio {
     public void setPosicion(Posicion posicion) {
         this.posicion = posicion;
     }
+    
+    public void describirEdificio(){
+        if("ciudadela".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(recurso.getComida() + recurso.getMadera() + recurso.getPiedra());
+            System.out.println(puntosSalud);
+        }
+        else if("casa".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(puntosSalud);
+            System.out.println(capacidad);
+        }
+        else if("cuartel".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(puntosSalud);
+        }
+    }
 }
