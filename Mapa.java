@@ -221,25 +221,7 @@ public class Mapa {
         
     }
     
-    public void describirCelda (String nombre){
-        Celda celdaAuxiliar=new Celda();
-        
-        for(int i=0; i<miMapa.size(); i++){
-            for(int j=0; j<miMapa.get(0).size(); j++){
-                celdaAuxiliar=miMapa.get(i).get(j);
-                if(celdaAuxiliar.getContenedor().getNombre().equals(parseInt(nombre))){
-                   
-                   
-                }
-                else if(celdaAuxiliar.getEdificio().getNombre().equals(nombre)){
-                    
-                }
-                else if(celdaAuxiliar.getPersonaje().equals(nombre)){
-                    
-                }
-            }
-        }
-    }
+    
         
     }
     
