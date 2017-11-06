@@ -25,6 +25,14 @@ public class Celda {
         this.tipo = "pradera";
     }
 
+   public Celda(int x, int y) {
+        this.posicion = new Posicion(x, y);
+        this.contenedor = null;
+        this.personaje = null;
+        this.edificio = null;
+        this.tipo = "pradera";
+    }
+
     public Posicion getPosicion() {
         return posicion;
     }
