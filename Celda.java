@@ -70,6 +70,26 @@ public class Celda {
         }
         
     }
+
+    public void describirCelda (){
+        
+       if("ciudadela".equals(tipo) || "casa".equals(tipo) || "cuartel".equals(tipo)) {
+           if(edificio!=null){
+               edificio.describirEdificio();
+           }
+       }
+       else if("paisano".equals(tipo) || "soldado".equals(tipo)) {
+            if(personaje!=null){
+                personaje.describirPersonaje();
+            }
+       }
+       else if("cantera".equals(tipo) || "bosque".equals(tipo) || "arbusto".equals(tipo)) {
+           if(contenedor!=null){
+               contenedor.describirContenedorRecurso();
+           }
+           
+       }
+    }
     
     
     
