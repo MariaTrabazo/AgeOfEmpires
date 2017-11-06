@@ -107,7 +107,23 @@ public class ContenedoresRecurso {
         this.cantidadComida = cantidadComida;
     }
 
-    
+    public void describirContenedorRecurso(){
+        if("arbusto".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(recurso.getComida());
+            System.out.println(cantidadComida);
+        }
+        else if("cantera".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(recurso.getPiedra());
+            System.out.println(cantidadPiedra);
+        }
+        else if("bosque".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(recurso.getMadera());
+            System.out.println(cantidadMadera);
+        }
+    }
     
     
     
