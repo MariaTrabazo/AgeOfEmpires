@@ -147,6 +147,21 @@ public class Personaje {
         this.nombre = nombre;
     }
     
+    public void describirPersonaje(){
+        if("paisano".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(ataque);
+            System.out.println(armadura);
+            System.out.println(salud);
+            System.out.println(capacidadRecoleccion);
+        }
+        else if("soldado".equals(tipo)){
+            System.out.println(posicion);
+            System.out.println(ataque);
+            System.out.println(armadura);
+            System.out.println(salud);
+        }
+    }
     
     
     
