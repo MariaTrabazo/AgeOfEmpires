@@ -11,7 +11,7 @@ package ageofempires_parte1;
  */
 public class Celda {
     
-    private Posicion posicion;
+   private Posicion posicion;
     private ContenedoresRecurso contenedor;
     private Edificio edificio;
     private Personaje personaje;
@@ -31,8 +31,8 @@ public class Celda {
         this.personaje = null;
         this.edificio = null;
         this.tipo = "pradera";
-    }
-
+    }   
+   
     public Posicion getPosicion() {
         return posicion;
     }
@@ -78,7 +78,7 @@ public class Celda {
         }
         
     }
-
+    
     public void describirCelda (){
         
        if("ciudadela".equals(tipo) || "casa".equals(tipo) || "cuartel".equals(tipo)) {
