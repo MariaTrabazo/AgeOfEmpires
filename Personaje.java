@@ -11,7 +11,7 @@ package ageofempires_parte1;
  */
 public class Personaje {
     
-    private String tipo;
+   private String tipo;
     private int salud;
     private int ataque;
     private int armadura;
@@ -32,12 +32,12 @@ public class Personaje {
     }
     
     public Personaje(){
-        if("soldado".equals(tipo)){
+        if("Soldado".equals(tipo)){
             salud=200;
             ataque=600;
             armadura=400;
         }
-        else if("paisano".equals(tipo)){
+        else if("Paisano".equals(tipo)){
             salud=200;
             ataque=300;
             armadura=200;
@@ -78,11 +78,11 @@ public class Personaje {
     }
 
     public void setTipo(String tipo) {
-        if(!"soldado".equals(tipo)|| !"paisano".equals(tipo)){
-            System.out.println("No hay personajes de este tipo");
+        if("soldado".equals(tipo)|| "paisano".equals(tipo)){
+            this.tipo = tipo;
         }
         else{
-           this.tipo = tipo; 
+            System.out.println("No hay personajes de este tipo");
         }
         
     }
@@ -116,7 +116,7 @@ public class Personaje {
     }
 
     public void setCapacidadRecoleccion(int capacidadRecoleccion) {
-        if("soldado".equals(tipo)){
+        if("Soldado".equals(tipo)){
             this.capacidadRecoleccion=0;
         }
         else{
