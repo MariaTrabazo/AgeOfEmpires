@@ -12,120 +12,154 @@ package ageofempires_parte1;
 public class Edificio {
 
     private String tipo;
-    private int puntosSalud;
-    private int costeReparacion;
-    private Recursos recurso;
-    private int capacidad;
+    private int salud;
+    private int ataque;
+    private int armadura;
+    private int capacidadRecoleccion;
+    private String tipoRecurso;
     private Posicion posicion;
+    private String nombre;
 
-    public Edificio() {
-        if ("casa".equals(tipo)) {
-            puntosSalud = 400;
-            costeReparacion = 600;
-//            recurso.setMadera(100);
-//            recurso.setPiedra(200);
-//           capacidad = 20;
-        } else if ("cuartel".equals(tipo)) {
-            puntosSalud = 500;
-            costeReparacion = 700;
-//            recurso.setMadera(150);
-//            recurso.setPiedra(250);
-        } else if ("ciudadela".equals(tipo)) {
-            puntosSalud = 600;
-            costeReparacion = 700;
-//            recurso.setMadera(200);
-//            recurso.setPiedra(300);
-            capacidad = 10;
-        }
-    }
-
-    public Edificio(String tipo, int puntosSalud, int costeReparacion, Recursos recurso, int capacidad) {
+    public Personaje(String tipo, int salud, int ataque, int armadura, int capacidadRecoleccion,  String tipoRecurso, Posicion posicion, String nombre ) {
         this.tipo = tipo;
-        this.puntosSalud = puntosSalud;
-        this.costeReparacion = costeReparacion;
-        this.recurso = recurso;
-        this.capacidad = capacidad;
+        this.salud = salud;
+        this.ataque = ataque;
+        this.armadura = armadura;
+        this.capacidadRecoleccion= capacidadRecoleccion;
+        this.posicion=posicion;
+        this.tipoRecurso=tipoRecurso;
+        this.nombre=nombre;
+    }
+    
+    public Personaje(){
+        if("Soldado".equals(tipo)){
+            salud=200;
+            ataque=600;
+            armadura=400;
+        }
+        else if("Paisano".equals(tipo)){
+            salud=200;
+            ataque=300;
+            armadura=200;
+            capacidadRecoleccion=300;
+        }
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public int getPuntosSalud() {
-        return puntosSalud;
+    public int getSalud() {
+        return salud;
     }
 
-    public int getCosteReparacion() {
-        return costeReparacion;
+    public int getAtaque() {
+        return ataque;
     }
 
-    public Recursos getRecurso() {
-        return recurso;
+    public int getArmadura() {
+        return armadura;
     }
 
-    public int getCapacidad() {
-        return capacidad;
+    public int getCapacidadRecoleccion() {
+        return capacidadRecoleccion;
+    }
+
+    public String getTipoRecurso() {
+        return tipoRecurso;
     }
 
     public Posicion getPosicion() {
         return posicion;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public void setTipo(String tipo) {
-        if (!"casa".equals(tipo) || !"ciudadela".equals(tipo) || !"cuartel".equals(tipo)) {
-            System.out.println("No hay personajes de este tipo");
-        } else {
+        if("soldado".equals(tipo)|| "paisano".equals(tipo)){
             this.tipo = tipo;
         }
-
-    }
-
-    public void setPuntosSalud(int puntosSalud) {
-        if (puntosSalud == 0) {
-            System.out.println("No se puede reconstruir el edificio");
-        } else {
-            this.puntosSalud = puntosSalud;
+        else{
+            System.out.println("No hay personajes de este tipo");
         }
-
+        
     }
 
-    public void setCosteReparacion(int costeReparacion) {
-        this.costeReparacion = costeReparacion;
+    public void setSalud(int salud) {
+        if(salud<0){
+            System.out.println("La salud ha de ser superior a 0");
+        }
+        else{
+            this.salud = salud;
+        }
+        
     }
 
-    public void setRecurso(Recursos recurso) {
-        this.recurso = recurso;
-
+    public void setAtaque(int ataque) {
+        if(ataque<0){
+            System.out.println("El ataque ha de ser superior a 0");
+        }
+        else{
+            this.ataque = ataque;
+        }
     }
 
-    public void setCapacidad(int capacidad) {
-        if("ciudadela".equals(tipo)){
-            if(capacidad > 10){
-                System.out.println("No se pueden crear más ciudadanos, no hay espacio en la ciudadela");
+    public void setArmadura(int armadura) {
+        if(armadura<0){
+            System.out.println("La aramdura ha de ser superior a 0");
+        }
+        else{
+            this.armadura = armadura;
+        }
+    }
+
+    public void setCapacidadRecoleccion(int capacidadRecoleccion) {
+        if("Soldado".equals(tipo)){
+            this.capacidadRecoleccion=0;
+        }
+        else{
+            if(capacidadRecoleccion<0){
+                System.out.println("La capacidad de recoleccion tiene que ser superior a 0");
             }
-            
+            else{
+                this.capacidadRecoleccion = capacidadRecoleccion;
+            }
         }
-        this.capacidad = capacidad;
+        
+    }
+
+    public void setTipoRecurso(String tipoRecurso) {
+        if(!"madera".equals(tipoRecurso) || !"piedra".equals(tipoRecurso) || !"comida".equals(tipoRecurso)){
+            System.out.println("No existe este recurso");
+        }
+        else{
+            this.tipoRecurso = tipoRecurso;
+        }
     }
 
     public void setPosicion(Posicion posicion) {
         this.posicion = posicion;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     
-    public void describirEdificio(){
-        if("ciudadela".equals(tipo)){
+    public void describirPersonaje(){
+        if("paisano".equals(tipo)){
             System.out.println(posicion);
-            System.out.println(recurso.getComida() + recurso.getMadera() + recurso.getPiedra());
-            System.out.println(puntosSalud);
+            System.out.println(ataque);
+            System.out.println(armadura);
+            System.out.println(salud);
+            System.out.println(capacidadRecoleccion);
         }
-        else if("casa".equals(tipo)){
+        else if("soldado".equals(tipo)){
             System.out.println(posicion);
-            System.out.println(puntosSalud);
-            System.out.println(capacidad);
-        }
-        else if("cuartel".equals(tipo)){
-            System.out.println(posicion);
-            System.out.println(puntosSalud);
+            System.out.println(ataque);
+            System.out.println(armadura);
+            System.out.println(salud);
         }
     }
 }
