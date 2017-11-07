@@ -181,15 +181,15 @@ public class Mapa {
                         devolverMapa+="\t" + "B";
                         break;
                     case "casa":
-                        String[] casas=celdaAuxiliar.getEdificio().getTipo().split("-");
+                        String[] casas=celdaAuxiliar.getEdificio().getNombre().split("-");
                         devolverMapa+="\t" + "Cas"+casas[1];
                         break;
                     case "ciudadela":
-                        String[] ciudadelas=celdaAuxiliar.getEdificio().getTipo().split("-");
+                        String[] ciudadelas=celdaAuxiliar.getEdificio().getNombre().split("-");
                         devolverMapa+="\t" + "Ciu"+ciudadelas[1];
                         break;
                     case "cuartel":
-                        String[] cuarteles=celdaAuxiliar.getEdificio().getTipo().split("-");
+                        String[] cuarteles=celdaAuxiliar.getEdificio().getNombre().split("-");
                         devolverMapa+="\t" + "Cuar"+cuarteles[1];
                         break;
                 }
