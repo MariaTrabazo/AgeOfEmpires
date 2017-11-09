@@ -149,17 +149,17 @@ public class Personaje {
     
     public void describirPersonaje(){
         if("paisano".equals(tipo)){
-            System.out.println(posicion);
-            System.out.println(ataque);
-            System.out.println(armadura);
-            System.out.println(salud);
-            System.out.println(capacidadRecoleccion);
+            System.out.println("La posicion es " + posicion);
+            System.out.println("El ataque es " + ataque);
+            System.out.println("La armadura es " + armadura);
+            System.out.println("Los puntos de saludo son " + salud);
+            System.out.println("La capadidad de recoleccion es " + capacidadRecoleccion);
         }
         else if("soldado".equals(tipo)){
-            System.out.println(posicion);
-            System.out.println(ataque);
-            System.out.println(armadura);
-            System.out.println(salud);
+            System.out.println("La posicion es " + posicion);
+            System.out.println("El ataque es " + ataque);
+            System.out.println("La armadura es " + armadura);
+            System.out.println("Los puntos de saludo son " + salud);
         }
     }
     
