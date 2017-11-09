@@ -154,18 +154,18 @@ public class Edificio {
     
     public void describirEdificio(){
         if("ciudadela".equals(tipo)){
-            System.out.println(posicion);
-            System.out.println(recurso.getComida() + recurso.getMadera() + recurso.getPiedra());
-            System.out.println(puntosSalud);
+            System.out.println("La posicion es " + posicion);
+            System.out.println("La cantidad de comida es \n" + recurso.getComida() + "La cantidad de madera es \n" + recurso.getMadera() + "La cantidad de piedra es " + recurso.getPiedra());
+            System.out.println("Los puntos de salud son " + puntosSalud);
         }
         else if("casa".equals(tipo)){
-            System.out.println(posicion);
+            System.out.println("La posicion es " + posicion);
             System.out.println(puntosSalud);
-            System.out.println(capacidad);
+            System.out.println("Los puntos de salud son " + puntosSalud);
         }
         else if("cuartel".equals(tipo)){
-            System.out.println(posicion);
-            System.out.println(puntosSalud);
+            System.out.println("La posicion es " + posicion);
+            System.out.println("Los puntos de salud son " + puntosSalud);
         }
     }
 }
