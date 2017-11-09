@@ -49,6 +49,22 @@ public class AgeOfEmpires_parte1 {
                     }
                     break;
                 case "describir":
+                    if(comando.length!=2){
+                        System.out.println("El numero de parametros pasados es incorrecto");
+                    }
+                    else{
+                        String nombre[]=comando[1].split("-");
+                        if("Paisano".equals(nombre[0]) || "Soldado".equals(nombre[0])){
+                            Personaje p1=null;
+                            p1=mapaPrueba.devolverPersonaje(comando[1]);
+                            p1.describirPersonaje();
+                        }
+                        else if("Ciudadela".equals(nombre[0]) || "Casa".equals(nombre[0]) || "Cuartel".equals(nombre[0])){
+                            Edificio e1=null;
+                            e1=mapaPrueba.devolverEdificio(comando[1]);
+                            e1.describirEdificio();
+                        }
+                    }
                     break;
                 case "mirar": 
                     break;
