@@ -7,65 +7,65 @@ package ageofempires_parte1;
 
 /**
  *
- * @author crysa
+ * @author Cristina Alvarez Vales y María Trabazo Segura
  */
-public class Punto {
-    
-    private float x;
-    private float y;
-    
-    
-    public Punto() {
+public class Posicion {
+
+    private int x;
+    private int y;
+
+    public Posicion() {
         x = 0;
         y = 0;
     }
-    
-    public Punto(float valorX, float valorY){
+
+    public Posicion(int valorX, int valorY) {
         x = valorX;
         y = valorY;
-        
+
     }
-    
-    public float getX(){
+
+    public int getX() {
         return x;
     }
-    
-    public void setX(float valor){
+
+    public void setX(int valor) {
         x = valor;
     }
-    
-    public float getY(){
+
+    public int getY() {
         return y;
     }
-    
-    public void setY(float valor){
+
+    public void setY(int valor) {
         x = valor;
     }
-    
-    public void moverX(float valor){
-        x+=valor;
-    }    
-    
-    public void moverY(float valor){
-        y+=valor;
+
+    public void moverX(int valor) {
+        x += valor;
     }
-    
+
+    public void moverY(int valor) {
+        y += valor;
+    }
+
     @Override
     public String toString() {
-        return "Punto{" + "x=" + x + ", y=" + y + '}';
+        return "(" +  x + "," + y + ')';
     }
-     @Override
+
+    @Override
     public boolean equals(Object obj) {
-        if (this == obj){
+        if (this == obj) {
             return true;
         }
         if (obj == null) {
             return false;
         }
-        if (getClass()!= obj.getClass()) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        final Punto other = (Punto) obj;
+        final Posicion other = (Posicion) obj;
         if (this.x != other.x) {
             return false;
         }
@@ -75,10 +75,10 @@ public class Punto {
         return true;
     }
 
-      @Override
+    @Override
     public int hashCode() {
         int hash = 5;
         return hash;
     }
-    
+
 }
