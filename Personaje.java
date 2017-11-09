@@ -31,7 +31,7 @@ public class Personaje {
         this.nombre=nombre;
     }
     
- public Personaje(String tipo, String nombre){
+ public Personaje(String nombre, String tipo){
         this.posicion = new Posicion();
         this.nombre = nombre;
         this.tipo = tipo;      
