@@ -31,19 +31,22 @@ public class Personaje {
         this.nombre=nombre;
     }
     
-    public Personaje(){
-        if("Soldado".equals(tipo)){
-            salud=200;
-            ataque=600;
-            armadura=400;
+ public Personaje(String tipo, String nombre){
+        this.posicion = new Posicion();
+        this.nombre = nombre;
+        this.tipo = tipo;      
+        
+        if("soldado".equals(tipo)){
+            salud=600;
+            ataque=700;
+            armadura=600;
         }
-        else if("Paisano".equals(tipo)){
-            salud=200;
+        else if("paisano".equals(tipo)){
+            salud=500;
             ataque=300;
-            armadura=200;
-            capacidadRecoleccion=300;
+            armadura=300;
+            capacidadRecoleccion=500;
         }
-    }
 
     public String getTipo() {
         return tipo;
