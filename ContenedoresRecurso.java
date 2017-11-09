@@ -28,10 +28,25 @@ public class ContenedoresRecurso {
         this.cantidadComida = cantidadComida;
     }
 
-    public ContenedoresRecurso() {
+  public ContenedoresRecurso(String tipo, String nombre) {
         this.recurso = new Recursos();
         this.posicion = new Posicion();
-        
+        this.tipo = tipo;
+        this.nombre = nombre;
+        if ("cantera".equals(tipo)) {
+            cantidadPiedra = 5000;
+            recurso.setPiedra(cantidadPiedra);
+        }
+        if ("bosque".equals(tipo)) {
+            cantidadMadera = 5000;
+            recurso.setMadera(cantidadMadera);
+        }
+        if ("cantera".equals(tipo)) {
+            cantidadComida = 5000;
+            recurso.setComida(cantidadComida);
+        }
+        posicion = new Posicion();
+
     }
     
     public String getTipo() {
