@@ -53,12 +53,34 @@ public class Edificio {
         recurso= new Recursos();
         posicion= new Posicion();
     }
-    public Edificio(String nombre, String tipo) {
+      public Edificio(String tipo, String nombre) {
+        this.recurso = new Recursos();
+        this.posicion= new Posicion();
         this.nombre=nombre;
         this.tipo=tipo;
-        recurso= new Recursos();
-        posicion= new Posicion();
+      
+        if (tipo.equals("casa")) {
+            puntosSalud = 400;
+            costeReparacion = 600;
+            //recurso.setPiedra(200);
+            capacidad = 20;
+        } else if (tipo.equals("cuartel")) {
+            puntosSalud = 500;
+            costeReparacion = 700;
+            //recurso.setMadera(150);
+            //recurso.setPiedra(250);
+        } else if (tipo.equals("ciudadela")) {
+            puntosSalud = 5000;
+            costeReparacion = 700;
+            recurso.setComida(3000);
+            recurso.setMadera(3000);
+            recurso.setPiedra(3000);
+            //recurso.setMadera(200);
+            //recurso.setPiedra(300);
+            capacidad = 10;
+        }
     }
+
 
     public String getTipo() {
         return tipo;
