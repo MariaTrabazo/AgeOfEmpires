@@ -53,18 +53,12 @@ public class Mapa {
                     }
                     
                     else if (i==2 && j==2){
-                        Personaje paisano1=new Personaje();
-                        paisano1.setArmadura(300);
-                        paisano1.setAtaque(100);
-                        paisano1.setCapacidadRecoleccion(3000);
-                        paisano1.setNombre("Paisano-1");
-                        paisano1.setTipo("paisano");
-                        paisano1.setSalud(1000);
-                        Posicion p2=new Posicion(i, j);
-                        paisano1.setPosicion(p2);
-                        celdaAux.setTipo("paisano");
-                        celdaAux.setPersonaje(paisano1);
-                        listaPersonajes.put("Paisano-1", paisano1);
+                        celdaAux.setTipo("pradera"); 
+                        Personaje personaje1=new Personaje("Paisano-1","paisano"); 
+                        Posicion p2=new Posicion(i,j);
+                        personaje1.setPosicion(p2);
+                        celdaAux.setPersonaje(personaje1);
+                        listaPersonajes.put("Paisano-1", personaje1);
                     }
                     
                     else if(i==1 && j==4){
@@ -77,7 +71,7 @@ public class Mapa {
                         celdaAux.setTipo("arbusto");
                         celdaAux.setContenedor(contenedor1);//va a haber que añadir un contador 
                     }
-                    else if(i==3 && j==4){
+                    else if(i==3 && j==2){
                         ContenedoresRecurso contenedor2= new ContenedoresRecurso();
                         contenedor2.setTipo("bosque");
                         contenedor2.setNombre("Bosque");
@@ -101,7 +95,11 @@ public class Mapa {
                     fila.add(celdaAux);
                 }
             }
-            
+            /*contadorCiudadelas=2;
+            contadorBosques=1;
+            contadorArbustos=2;
+            contadorCantera=1;
+            contadorPersonajes=1;*/
         //}
         
     }
@@ -150,7 +148,7 @@ public class Mapa {
     public void dibujarMapa(){
         
         String devolverMapa="\n";
-        int columna=0, fila;
+        int columna, fila;
       
         for (fila=0; fila<miMapa.size(); fila++){
             for (columna=0; columna<miMapa.get(0).size(); columna++){
@@ -158,11 +156,11 @@ public class Mapa {
                 switch(celdaAuxiliar.getTipo()){
                     case "pradera":
                         if(celdaAuxiliar.getPersonaje()!=null){
-                            if("paisano".equals(celdaAuxiliar.getTipo())){
+                            if("paisano".equals(celdaAuxiliar.getPersonaje().getTipo())){
                                 String[] personaje=celdaAuxiliar.getPersonaje().getNombre().split("-");
                                 devolverMapa+="\t" + "P"+personaje[1];
                             }
-                            else if("soldado".equals(celdaAuxiliar.getTipo())){
+                            else if("soldado".equals(celdaAuxiliar.getPersonaje().getTipo())){
                                 String[] personaje=celdaAuxiliar.getPersonaje().getNombre().split("-");
                                 devolverMapa+="\t" + "S"+personaje[1];
                             }
@@ -200,7 +198,7 @@ public class Mapa {
       }
       System.out.println(devolverMapa);
     }
-        
+    
     public void listarPersonajes(){
         Personaje personajeResultado=null;
         for(String key: listaPersonajes.keySet()){
@@ -219,6 +217,28 @@ public class Mapa {
             
         }
         
+    }
+    
+    public Personaje devolverPersonaje(String nombre){
+        Personaje personajeAux= null;
+        for(String key: listaPersonajes.keySet()){
+            personajeAux=listaPersonajes.get(key);
+            if(personajeAux.getNombre().equals(nombre)){
+                return personajeAux;
+            }      
+        }
+        return null;
+    }
+    
+    public Edificio devolverEdificio(String nombre){
+        Edificio edificioAux= null;
+        for(String key: listaEdificios.keySet()){
+            edificioAux=listaEdificios.get(key);
+            if(edificioAux.getNombre().equals(nombre)){
+                return edificioAux;
+            }      
+        }
+        return null;
     }
     
     
