@@ -49,7 +49,7 @@ public class Edificio {
         this.recurso = recurso;
         this.capacidad = capacidad;
     }*/
-    public Edificio(String tipo, String nombre) {
+    public Edificio(String nombre, String tipo) {
         this.recurso = new Recursos();
         this.posicion= new Posicion();
         this.nombre=nombre;
