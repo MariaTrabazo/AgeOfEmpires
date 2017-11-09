@@ -69,11 +69,7 @@ public class Edificio {
         } else if ("ciudadela".equals(tipo)) {
             puntosSalud = 5000;
             costeReparacion = 700;
-            recurso.setComida(3000);
-            recurso.setMadera(3000);
-            recurso.setPiedra(3000);
-            //recurso.setMadera(200);
-            //recurso.setPiedra(300);
+            recurso = new Recursos(3000,3000,3000);
             capacidad = 10;
         }
     }
