@@ -79,29 +79,29 @@ public class Celda {
         
     }
     
-    public void describirCelda (){
-        
-       if("ciudadela".equals(tipo) || "casa".equals(tipo) || "cuartel".equals(tipo)) {
-           if(edificio!=null){
-               edificio.describirEdificio();
-           }
-       }
-       else if("paisano".equals(tipo) || "soldado".equals(tipo)) {
-            if(personaje!=null){
-                personaje.describirPersonaje();
+        public void describirCelda() {
+
+        if ("ciudadela".equals(tipo) || "casa".equals(tipo) || "cuartel".equals(tipo)) {
+            if (edificio != null) {
+                edificio.mirarEdificio();
             }
-       }
-       else if("cantera".equals(tipo) || "bosque".equals(tipo) || "arbusto".equals(tipo)) {
-           if(contenedor!=null){
-               contenedor.describirContenedorRecurso();
-           }
-           
-       }
+        } else if ("cantera".equals(tipo) || "bosque".equals(tipo) || "arbusto".equals(tipo)) {
+            if (contenedor != null) {
+                System.out.println(contenedor);
+            }
+
+        } else if ("pradera".equals(tipo)) {
+            if (personaje != null) {
+                if ("paisano".equals(personaje.getTipo()) || "soldado".equals(personaje.getTipo())) {
+
+                    personaje.mirarPersonaje();
+
+                }
+            } else {
+                System.out.println("Celda de tipo pardera");
+            }
+        }
     }
     
-    
-    
-    
-    
-    
+        
 }
