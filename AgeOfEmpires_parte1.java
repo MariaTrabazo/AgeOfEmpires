@@ -66,7 +66,17 @@ public class AgeOfEmpires_parte1 {
                         }
                     }
                     break;
-                case "mirar": 
+                case "mirar":
+                    if (comando.length != 2) {
+                        System.out.println("El numero de parametros pasados es incorrecto");
+                    } else {
+                        String pos = comando[1];
+                        Posicion posicion = new Posicion(Character.getNumericValue(pos.charAt(1)), Character.getNumericValue(pos.charAt(3)));
+                        mapaPrueba.mirarCelda(posicion);
+
+                    }
+                    break;
+                case "mover": 
                     if(comando.length!=3){
                         System.out.println("El numero de parametros pasados es incorrecto");
                     }
