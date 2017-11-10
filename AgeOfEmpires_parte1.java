@@ -67,6 +67,25 @@ public class AgeOfEmpires_parte1 {
                     }
                     break;
                 case "mirar": 
+                    if(comando.length!=3){
+                        System.out.println("El numero de parametros pasados es incorrecto");
+                    }
+                    else{
+                        String nombre[]=comando[1].split("-");
+                        if("Paisano".equals(nombre[0]) || "Soldado".equals(nombre[0])){
+                            Personaje p1=null;
+                            p1=mapaPrueba.devolverPersonaje(comando[1]);
+                            Posicion posAux=p1.getPosicion();
+                            System.out.println(posAux);
+                            mapaPrueba.mover(p1, comando[2]);
+                            System.out.println(p1.getPosicion());
+                            if(p1.getPosicion()!=posAux){
+                                (mapaPrueba.devolverCelda(p1.getPosicion())).setPersonaje(p1);
+                                mapaPrueba.devolverCelda(posAux).setPersonaje(null);
+                                 
+                            }
+                        }
+                        mapaPrueba.dibujarMapa();
                     break;
             }
         }
