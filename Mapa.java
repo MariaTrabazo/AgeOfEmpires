@@ -230,6 +230,32 @@ public class Mapa {
         return null;
     }
     
+     public Edificio devolverEdificio(String nombre) {
+        Edificio edificioAux = null;
+        for (String key : listaEdificios.keySet()) {
+            edificioAux = listaEdificios.get(key);
+            if (edificioAux.getNombre().equals(nombre)) {
+                return edificioAux;
+            }
+        }
+        return null;
+    }
+
+    public void mirarCelda(Posicion posicion) {
+
+        int fila, columna;
+        for (fila = 0; fila < miMapa.size(); fila++) {
+            for (columna = 0; columna < miMapa.get(0).size(); columna++) {
+                Celda celdaAuxiliar = miMapa.get(fila).get(columna);
+
+                if (posicion.equals(celdaAuxiliar.getPosicion())) {
+                    celdaAuxiliar.describirCelda();
+                }
+            }
+        }
+
+    }
+    
     public void mover(Personaje personaje, String direccion){
         Celda celdaAdyacente=devolverCeldaAdyacente(personaje.getPosicion(), direccion);
         if(celdaAdyacente!=null){
