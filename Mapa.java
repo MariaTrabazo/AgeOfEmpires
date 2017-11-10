@@ -230,15 +230,85 @@ public class Mapa {
         return null;
     }
     
-    public Edificio devolverEdificio(String nombre){
-        Edificio edificioAux= null;
-        for(String key: listaEdificios.keySet()){
-            edificioAux=listaEdificios.get(key);
-            if(edificioAux.getNombre().equals(nombre)){
-                return edificioAux;
-            }      
+    public void mover(Personaje personaje, String direccion){
+        Celda celdaAdyacente=devolverCeldaAdyacente(personaje.getPosicion(), direccion);
+        if(celdaAdyacente!=null){
+            if("pradera".equals(celdaAdyacente.getTipo()) && celdaAdyacente.getPersonaje()==null){
+                personaje.setPosicion(celdaAdyacente.getPosicion());
+                System.out.println("El " +personaje.getNombre()+ " se ha movido a la posicion "+ personaje.getPosicion());
+            }
+            else if(!"pradera".equals(celdaAdyacente.getTipo())){
+                System.out.println("Solo te puedes mover por las praderas");
+            }
         }
-        return null;
+        else{
+            System.out.println("No existe el personaje");
+        }
+        
+    }
+    
+    public Celda devolverCeldaAdyacente(Posicion posicion, String direccion){
+        Celda celdaAdyacente;
+        
+        for(int i=0; i<miMapa.size(); i++){
+            for(int j=0; j<miMapa.get(0).size(); j++){
+                if( i==posicion.getX() && j==posicion.getY() && "NORTE".equals(direccion)){
+                    if(j!=4){
+                        celdaAdyacente=miMapa.get(i).get(j-1);
+                        return celdaAdyacente;
+                    }
+                    else{
+                        System.out.println("Estas fuera de los limites");
+                    }
+                }
+                
+                
+                if("SUR".equals(direccion) && i==posicion.getX() && j==posicion.getY()){
+                    if(j!=4){
+                        celdaAdyacente=miMapa.get(i).get(j+1);
+                        return celdaAdyacente;
+                    }
+                    else{
+                        System.out.println("Estas fuera de los limites");
+                    }
+                }
+                
+                
+                if("ESTE".equals(direccion) && i==posicion.getX() && j==posicion.getY()){
+                    if(i!=0){
+                        celdaAdyacente=miMapa.get(i-1).get(j);
+                        return celdaAdyacente;
+                    }
+                    else{
+                        System.out.println("Estas fuera de los limites");
+                    }
+                }
+                
+                
+                if("OESTE".equals(direccion) && i==posicion.getX() && j==posicion.getY()){
+                    if(i!=0){
+                        celdaAdyacente=miMapa.get(i+1).get(j);
+                        return celdaAdyacente;
+                    }
+                    else{
+                        System.out.println("Estas fuera de los limites");
+                    }
+                }
+            }
+        }
+        
+        return null; 
+    }
+    
+    public Celda devolverCelda (Posicion posicion){
+        Celda celdaAux=new Celda();
+        
+        for(int i=0; i<miMapa.size(); i++){
+            for(int j=0; j<miMapa.get(0).size(); j++){
+                celdaAux=miMapa.get(i).get(j);
+            }
+        }
+        return celdaAux;
     }
     
     
