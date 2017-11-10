@@ -129,7 +129,20 @@ public class ContenedoresRecurso {
         }
     }
     
-    
+      @Override
+    public String toString() {
+        String x=null;
+        if("arbusto".equals(tipo)){
+            x= "Celda de tipo arbusto" + "\nCantidad de comida es " + recurso.getComida();
+        }
+        else if("cantera".equals(tipo)){
+            x= "Celda de tipo cantera" + "\nCantidad de piedra es " + recurso.getPiedra();
+        }
+        else if("bosque".equals(tipo)){
+            x ="Celda de tipo bosque" +  "\nCantidad de madera es " + recurso.getMadera();
+        }
+        return x;
+    }
     
     
 }
