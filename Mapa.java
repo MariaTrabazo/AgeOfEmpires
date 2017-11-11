@@ -275,14 +275,14 @@ public class Mapa {
         
     }
     
-    public Celda devolverCeldaAdyacente(Posicion posicion, String direccion){
+   public Celda devolverCeldaAdyacente(Posicion posicion, String direccion){
         Celda celdaAdyacente;
         
         for(int i=0; i<miMapa.size(); i++){
             for(int j=0; j<miMapa.get(0).size(); j++){
                 if( i==posicion.getX() && j==posicion.getY() && "NORTE".equals(direccion)){
                     if(j!=4){
-                        celdaAdyacente=miMapa.get(i).get(j-1);
+                        celdaAdyacente=miMapa.get(i-1).get(j);
                         return celdaAdyacente;
                     }
                     else{
@@ -293,7 +293,7 @@ public class Mapa {
                 
                 if("SUR".equals(direccion) && i==posicion.getX() && j==posicion.getY()){
                     if(j!=4){
-                        celdaAdyacente=miMapa.get(i).get(j+1);
+                        celdaAdyacente=miMapa.get(i+1).get(j);
                         return celdaAdyacente;
                     }
                     else{
@@ -304,7 +304,7 @@ public class Mapa {
                 
                 if("ESTE".equals(direccion) && i==posicion.getX() && j==posicion.getY()){
                     if(i!=0){
-                        celdaAdyacente=miMapa.get(i-1).get(j);
+                        celdaAdyacente=miMapa.get(i).get(j+1);
                         return celdaAdyacente;
                     }
                     else{
@@ -315,7 +315,7 @@ public class Mapa {
                 
                 if("OESTE".equals(direccion) && i==posicion.getX() && j==posicion.getY()){
                     if(i!=0){
-                        celdaAdyacente=miMapa.get(i+1).get(j);
+                        celdaAdyacente=miMapa.get(i).get(j-1);
                         return celdaAdyacente;
                     }
                     else{
@@ -339,6 +339,34 @@ public class Mapa {
         return celdaAux;
     }
     
+    public void almacenarRecursos(Personaje personaje, String direccion){
+        Celda celda=devolverCeldaAdyacente(personaje.getPosicion(), direccion);
+        
+        if("ciudadela".equals(celda)){
+            if("piedra".equals(personaje.getTipoRecurso())){
+               celda.getEdificio().getRecurso().setPiedra(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getPiedra());
+               personaje.setCapacidadRecoleccion(0);
+           } 
+           
+            else if("madera".equals(personaje.getTipoRecurso())){
+               celda.getEdificio().getRecurso().setMadera(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getMadera());
+               personaje.setCapacidadRecoleccion(0);
+           }
+           
+            else if("comida".equals(personaje.getTipoRecurso())){
+               celda.getEdificio().getRecurso().setComida(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getComida());
+               personaje.setCapacidadRecoleccion(0);
+           }
+        }
+        else if("casa".equals(celda)){
+            System.out.println("No se puede almacenar recursos en una casa");
+        }
+        
+        else if("cuartel".equals(celda)){
+            System.out.println("No se puede almacenar recursos en un cuartel");
+        }
+        
+    }
     
         
     }
