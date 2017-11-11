@@ -260,7 +260,9 @@ public class Mapa {
         Celda celdaAdyacente=devolverCeldaAdyacente(personaje.getPosicion(), direccion);
         if(celdaAdyacente!=null){
             if("pradera".equals(celdaAdyacente.getTipo()) && celdaAdyacente.getPersonaje()==null){
+                miMapa.get(personaje.getPosicion().getX()).get(personaje.getPosicion().getY()).setPersonaje(null);
                 personaje.setPosicion(celdaAdyacente.getPosicion());
+                celdaAdyacente.setPersonaje(personaje);
                 System.out.println("El " +personaje.getNombre()+ " se ha movido a la posicion "+ personaje.getPosicion());
             }
             else if(!"pradera".equals(celdaAdyacente.getTipo())){
