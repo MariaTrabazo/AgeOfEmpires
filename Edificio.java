@@ -50,7 +50,7 @@ public class Edificio {
         this.capacidad = capacidad;
     }*/
     public Edificio(String nombre, String tipo) {
-        this.recurso = new Recursos();
+       
         this.posicion= new Posicion();
         this.nombre=nombre;
         this.tipo=tipo;
@@ -58,19 +58,17 @@ public class Edificio {
         
         if ("casa".equals(tipo)) {
             puntosSalud = 400;
-            costeReparacion = 600;
-            //recurso.setPiedra(200);
-            capacidad = 20;
+            costeReparacion = 1800;
+            recurso = new Recursos(1000, 800, null);
+            capacidad = 10;
         } else if ("cuartel".equals(tipo)) {
             puntosSalud = 500;
-            costeReparacion = 700;
-            //recurso.setMadera(150);
-            //recurso.setPiedra(250);
+            costeReparacion = 2000;
+            recurso = new Recursos(1100, 900, null);
         } else if ("ciudadela".equals(tipo)) {
             puntosSalud = 5000;
             costeReparacion = 700;
             recurso = new Recursos(3000,3000,3000);
-            capacidad = 10;
         }
     }
 
@@ -136,17 +134,9 @@ public class Edificio {
     }
 
     public void setCapacidad(int capacidad) {
-        if("casa".equals(tipo)){
-            if(capacidad > 10){
+      if("casa".equals(tipo)){
+            if(capacidad > 10 || capacidad <= 0){
                 System.out.println("No se pueden crear más paisanos, no hay espacio en la ciudadela");
-            }
-            else{
-                this.capacidad = capacidad;
-            }
-        }
-        else if("cuartel".equals(tipo)){
-            if(capacidad > 10){
-                System.out.println("No se pueden crear más soldados, no hay espacio en la ciudadela");
             }
             else{
                 this.capacidad = capacidad;
@@ -180,6 +170,23 @@ public class Edificio {
         }
         else if("cuartel".equals(tipo)){
             System.out.println("La posicion es " + posicion);
+            System.out.println("Los puntos de salud son " + puntosSalud);
+        }
+    }
+   
+   public void mirarEdificio(){
+          
+        if("ciudadela".equals(tipo)){
+            System.out.println("La celda es de tipo ciudadela");
+            System.out.println("La cantidad de comida es " + recurso.getComida() + "\nLa cantidad de madera es " + recurso.getMadera() + "\nLa cantidad de piedra es " + recurso.getPiedra());
+            System.out.println("Los puntos de salud son " + puntosSalud);
+        }
+        else if("casa".equals(tipo)){
+            System.out.println("La celda es de tipo casa");
+            System.out.println("Los puntos de salud son " + puntosSalud);
+        }
+        else if("cuartel".equals(tipo)){
+            System.out.println("La celda es de tipo cuartel");
             System.out.println("Los puntos de salud son " + puntosSalud);
         }
     }
