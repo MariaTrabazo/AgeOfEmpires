@@ -368,6 +368,158 @@ public class Mapa {
         
     }
     
+    public void almacenarRecursos(Personaje personaje, String direccion){
+        Celda celda=devolverCeldaAdyacente(personaje.getPosicion(), direccion);
+        
+        if("ciudadela".equals(celda.getTipo())){
+            if("piedra".equals(personaje.getTipoRecurso())){
+               celda.getEdificio().getRecurso().setPiedra(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getPiedra());
+               personaje.setCapacidadRecoleccion(0);
+           } 
+           
+            else if("madera".equals(personaje.getTipoRecurso())){
+               celda.getEdificio().getRecurso().setMadera(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getMadera());
+               personaje.setCapacidadRecoleccion(0);
+           }
+           
+            else if("comida".equals(personaje.getTipoRecurso())){
+               celda.getEdificio().getRecurso().setComida(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getComida());
+               personaje.setCapacidadRecoleccion(0);
+           }
+        }
+        else if("casa".equals(celda.getTipo())){
+            System.out.println("No se puede almacenar recursos en una casa");
+        }
+        
+        else if("cuartel".equals(celda.getTipo())){
+            System.out.println("No se puede almacenar recursos en un cuartel");
+        }
+        
+    }
+    
+    public void recolectarRecurso(Personaje paisano,String direccion){
+        Celda celdaAux=devolverCeldaAdyacente(paisano.getPosicion(), direccion);
+        
+            if("cantera".equals(celdaAux.getTipo())){
+               if(paisano.getCapacidadRecoleccion()<1000){
+                    celdaAux.getContenedor().setCantidadPiedra(celdaAux.getContenedor().getCantidadPiedra()-10);
+                    paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion()+10);
+                    paisano.setTipoRecurso("piedra");
+                    if(celdaAux.getContenedor().getCantidadPiedra()==0){
+                        celdaAux.setTipo("pradera");
+                        celdaAux.getContenedor().setRecurso(null);
+                       
+                    }
+               }
+               else{
+                   System.out.println("Ya no se puede recolectar mas.");
+               }
+                   
+            }
+            else if("bosque".equals(celdaAux.getTipo())){
+               if(paisano.getCapacidadRecoleccion()<1000){
+                    celdaAux.getContenedor().setCantidadMadera(celdaAux.getContenedor().getCantidadMadera()-10);
+                    paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion()+10);
+                    paisano.setTipoRecurso("madera");
+                    if(celdaAux.getContenedor().getCantidadMadera()==0){
+                        celdaAux.setTipo("pradera");
+                        celdaAux.getContenedor().setRecurso(null);
+                    }
+               }
+               else{
+                   System.out.println("Ya no se puede recolectar mas.");
+               }
+                   
+            }
+            else if("arbusto".equals(celdaAux.getTipo())){
+               if(paisano.getCapacidadRecoleccion()<1000){
+                    celdaAux.getContenedor().setCantidadComida(celdaAux.getContenedor().getCantidadComida()-10);
+                    paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion()+10);
+                    paisano.setTipoRecurso("comida");
+                    if(celdaAux.getContenedor().getCantidadComida()==0){
+                        celdaAux.setTipo("pradera");
+                        celdaAux.getContenedor().setRecurso(null);
+                    }
+               }
+               else{
+                   System.out.println("Ya no se puede recolectar mas.");
+               }
+                  
+            }
+    }
+    
+    public boolean buscarCiudadelaReparar(){
+        int capacidad1=0, capacidad2=0;
+            for(int i=0; i<5; i++){
+                for(int j=0; j<5; j++){
+                    Celda cAux=miMapa.get(i).get(j);
+                    if(cAux.getEdificio().getPuntosSalud()<500){
+                        if("ciudadela".equals(cAux.getTipo())){
+                           int a=cAux.getEdificio().getRecurso().getMadera();
+                           int b=cAux.getEdificio().getRecurso().getPiedra();
+                           if(a>200 && b>100){
+                               cAux.getEdificio().getRecurso().setMadera(a-200);
+                               cAux.getEdificio().getRecurso().setPiedra(b-100);
+                               capacidad1=200;
+                               capacidad2=100;
+                           }
+                           else{
+                               System.out.println("No hay suficientes recursos"); 
+                           }
+                        }
+                    }
+                    else{
+                        System.out.println("No es necesario repararlo");
+                    }
+                }
+            }
+            if(capacidad1==200 && capacidad2==100){
+                System.out.println("Coste de la reparacion: " + capacidad1 + " unidades de madera y " +capacidad2 +" unidades de piedra.");
+                return(true);
+            }
+            else{
+                return false;
+            }
+    }
+    
+    public void reparar( Personaje paisano,String direccion){
+        Celda celdaAux;
+        celdaAux=devolverCeldaAdyacente(paisano.getPosicion(), direccion);
+        if("ciudadela".equals(celdaAux.getTipo())){
+            if(celdaAux.getEdificio().getPuntosSalud()<500 && celdaAux.getEdificio().getPuntosSalud()>0 ){
+                if(buscarCiudadelaReparar()==true){
+                    celdaAux.getEdificio().setPuntosSalud(500);
+                }
+            }
+            else{
+                System.out.println("No es necesario repararlo");
+            }
+        }
+        else if("casa".equals(celdaAux.getTipo())){
+            if(celdaAux.getEdificio().getPuntosSalud()<500 && celdaAux.getEdificio().getPuntosSalud()>0 ){
+                if(buscarCiudadelaReparar()==true){
+                    celdaAux.getEdificio().setPuntosSalud(500);
+                }
+            }
+            else{
+                System.out.println("No es necesario repararlo");
+            }
+        }
+        else if("cuartel".equals(celdaAux.getTipo())){
+            if(celdaAux.getEdificio().getPuntosSalud()<500 && celdaAux.getEdificio().getPuntosSalud()>0 ){
+                if(buscarCiudadelaReparar()==true){
+                    celdaAux.getEdificio().setPuntosSalud(500);
+                }
+            }
+            else{
+                System.out.println("No es necesario repararlo");
+            }
+        }
+        else{
+            System.out.println("La celda no contiene ningun edificio");
+        }
+    }
+    
         
     }
     
