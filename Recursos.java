@@ -36,7 +36,7 @@ public class Recursos {
             System.out.println("El valor de la madera tiene que ser superior a 0");
         }
         else{
-           piedra = valorMadera; 
+           madera = valorMadera; 
         }
     }
 
@@ -63,7 +63,7 @@ public class Recursos {
             System.out.println("El valor de la comida tiene que ser superior a 0");
         }
         else{
-           piedra = valorComida; 
+           comida = valorComida; 
         }
     }
 
