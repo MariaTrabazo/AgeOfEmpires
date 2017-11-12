@@ -40,12 +40,14 @@ public class Personaje {
             salud=600;
             ataque=700;
             armadura=600;
+            coste = 100;
         }
         else if("paisano".equals(tipo)){
             salud=500;
             ataque=300;
             armadura=300;
             capacidadRecoleccion=500;
+            coste = 50;
         }
 
     public String getTipo() {
