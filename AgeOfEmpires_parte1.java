@@ -95,6 +95,35 @@ public class AgeOfEmpires_parte1 {
                         
                     }
                     break;
+                case "crear":
+                    if (comando.length != 3) {
+                        System.out.println("El numero de parametros pasados es incorrecto");
+                    } else {
+                        String nombre[] = comando[1].split("-");
+                        if ("Ciudadela".equals(nombre[0])) {
+                            Edificio e1 = null;
+                            e1 = mapaPrueba.devolverEdificio(comando[1]);
+                            mapaPrueba.crearPersonaje(e1, comando[2]);
+
+                        } else if ("Cuartel".equals(nombre[0])) {
+                            Edificio e1 = null;
+                            e1 = mapaPrueba.devolverEdificio(comando[1]);
+                            mapaPrueba.crearPersonaje(e1, comando[2]);
+                        }
+                    }
+                    break;
+
+                case "construir":
+                    if(comando.length != 4){
+                        System.out.println("El numero de parametros pasados es incorrecto");
+                    }
+                    else{
+                        Personaje p1 = null;
+                        p1 = mapaPrueba.devolverPersonaje(comando[1]);
+                        mapaPrueba.construirEdificio(p1, comando[2], comando[3]);
+                        mapaPrueba.dibujarMapa();
+                    }
+                    break;    
                 case "almacenar":
                     if(comando.length!=3){
                         System.out.println("El numero de parametros pasados es incorrecto");
