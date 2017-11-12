@@ -19,8 +19,11 @@ public class Mapa {
     private int contadorCiudadelas;
     private int contadorBosques;
     private int contadorArbustos;
-    private int contadorCantera;
-    private int contadorPersonajes;
+    private int contadorCantera; 
+    private int contadorPaisanos = 1;
+    private int contadorSoldados = 0;
+    private int contadorCasas = 0;
+    private int contadorCuarteles = 0;
     
     
 
@@ -38,14 +41,8 @@ public class Mapa {
                     //celdaAux.getPosicion().setX(i);
                     //celdaAux.getPosicion().setY(j);
                     if(i==0 && j==1){
-                        Edificio edificio1=new Edificio();
-                        edificio1.setTipo("ciudadela");
-                        edificio1.setNombre("Ciudadela-1");
-                        edificio1.getCantidad().setComida(3000);
-                        edificio1.getCantidad().setPiedra(3000);
-                        edificio1.getCantidad().setMadera(3000);
-                        edificio1.setPuntosSalud(5000);
-                        Posicion p=new Posicion(i, j);
+                        Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
+                        Posicion p = new Posicion(i, j);
                         edificio1.setPosicion(p);
                         celdaAux.setTipo("ciudadela");
                         celdaAux.setEdificio(edificio1);
@@ -62,35 +59,27 @@ public class Mapa {
                     }
                     
                     else if(i==1 && j==4){
-                        ContenedoresRecurso contenedor1= new ContenedoresRecurso();
-                        contenedor1.setTipo("arbusto");
-                        contenedor1.setNombre("Arbusto");
-                        contenedor1.getRecurso().setComida(5000);
-                        Posicion p3= new Posicion(i, j);
+                        ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto", "arbusto");
+                        Posicion p3 = new Posicion(i, j);
                         contenedor1.setPosicion(p3);
                         celdaAux.setTipo("arbusto");
                         celdaAux.setContenedor(contenedor1);//va a haber que añadir un contador 
                     }
                     else if(i==3 && j==2){
-                        ContenedoresRecurso contenedor2= new ContenedoresRecurso();
-                        contenedor2.setTipo("bosque");
-                        contenedor2.setNombre("Bosque");
-                        contenedor2.getRecurso().setComida(5000);
-                        Posicion p4= new Posicion(i, j);
+                       ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque", "bosque");
+                        Posicion p4 = new Posicion(i, j);
                         contenedor2.setPosicion(p4);
                         celdaAux.setTipo("bosque");
                         celdaAux.setContenedor(contenedor2);//va a haber que añadir un contador 
                     }
                     else if(i==0 && j==3){
-                        ContenedoresRecurso contenedor3= new ContenedoresRecurso();
-                        contenedor3.setTipo("cantera");
-                        contenedor3.setNombre("Cantera");
-                        contenedor3.getRecurso().setComida(5000);
-                        Posicion p4= new Posicion(i, j);
+                        ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera", "cantera");
+                        Posicion p4 = new Posicion(i, j);
                         contenedor3.setPosicion(p4);
                         celdaAux.setTipo("cantera");
                         celdaAux.setContenedor(contenedor3);//va a haber que añadir un contador 
                     }
+                    
                     
                     fila.add(celdaAux);
                 }
@@ -120,8 +109,20 @@ public class Mapa {
         return contadorCiudadelas;
     }
 
-    public int getContadorPersonajes() {
-        return contadorPersonajes;
+   public int getContadorPaisanos() {
+        return contadorPaisanos;
+    }
+
+    public int getContadorSoldados() {
+        return contadorSoldados;
+    }
+
+    public int getContadorCasas() {
+        return contadorCasas;
+    }
+
+    public int getContadorCuarteles() {
+        return contadorCuarteles;
     }
 
     public void setMiMapa(ArrayList<ArrayList<Celda>> miMapa) {
@@ -136,12 +137,20 @@ public class Mapa {
         this.listaEdificios = listaEdificios;
     }
 
-    public void setContadorCiudadelas(int contadorCiudadelas) {
-        this.contadorCiudadelas = contadorCiudadelas;
+     public void setContadorPaisanos(int contadorPaisanos) {
+        this.contadorPaisanos = contadorPaisanos;
     }
-    
-    public void setContadorPersonajes(int contadorPersonajes) {
-        this.contadorPersonajes = contadorPersonajes;
+
+    public void setContadorSoldados(int contadorSoldados) {
+        this.contadorSoldados = contadorSoldados;
+    }
+
+    public void setContadorCasas(int contadorCasas) {
+        this.contadorCasas = contadorCasas;
+    }
+
+    public void setContadorCuarteles(int contadorCuarteles) {
+        this.contadorCuarteles = contadorCuarteles;
     }
     
     
@@ -339,33 +348,145 @@ public class Mapa {
         return celdaAux;
     }
     
-    public void almacenarRecursos(Personaje personaje, String direccion){
-        Celda celda=devolverCeldaAdyacente(personaje.getPosicion(), direccion);
-        
-        if("ciudadela".equals(celda)){
-            if("piedra".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setPiedra(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getPiedra());
-               personaje.setCapacidadRecoleccion(0);
-           } 
-           
-            else if("madera".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setMadera(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getMadera());
-               personaje.setCapacidadRecoleccion(0);
-           }
-           
-            else if("comida".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setComida(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getComida());
-               personaje.setCapacidadRecoleccion(0);
-           }
+        public void crearPersonaje(Edificio edificio, String tipo) {
+
+        if ("paisano".equals(tipo)) {
+
+            String paisano = "Paisano-";
+            String numero = "";
+            numero = Integer.toString(contadorPaisanos + 1);
+            String total = paisano + numero;
+
+            Personaje paisanoNuevo = new Personaje(total, tipo);
+            Celda celdaAdyacente = devolverCeldaAdyacente(edificio.getPosicion(), "SUR");
+            if ("pradera".equals(celdaAdyacente.getTipo())) {
+                System.out.println("Coste de creación: " + paisanoNuevo.getCoste() + " unidades de comida");
+
+                int comida = edificio.getRecurso().getComida();
+                if (comida > 50) {
+
+                    paisanoNuevo.setPosicion(celdaAdyacente.getPosicion());
+                    celdaAdyacente.setPersonaje(paisanoNuevo);
+                    edificio.getRecurso().setComida(comida - 50);
+                    Edificio casa = devolverEdificio("Casa-1");
+                    int cap = casa.getCapacidad();
+                    edificio.setCapacidad(cap - 1);
+                    System.out.println("Te quedan " + edificio.getCapacidad() + " unidades de capacidad de alojamiento");
+
+                    System.out.println("El " + paisanoNuevo.getNombre() + " se ha encuentra a la posicion " + paisanoNuevo.getPosicion());
+                    listaPersonajes.put(paisanoNuevo.getNombre(), paisanoNuevo);
+                    contadorPaisanos++;
+                } else {
+                    System.out.println("No hay recursos suficientes para crear este personaje. Hay " + comida + " unidades de comida y se necesitan 50");
+                }
+
+            }
+
+        } else if ("soldado".equals(tipo)) {
+            String paisano = "Soldado-";
+            String numero = "";
+            numero = Integer.toString(contadorSoldados + 1);
+            String total = paisano + numero;
+
+            Personaje soldadoNuevo = new Personaje(total, tipo);
+            Celda celdaAdyacente = devolverCeldaAdyacente(edificio.getPosicion(), "SUR");
+            if ("pradera".equals(celdaAdyacente.getTipo())) {
+
+                System.out.println("Coste de creación: " + soldadoNuevo.getCoste() + " unidades de comida");
+                Edificio ciu = null;
+                ciu = devolverEdificio("Ciudadela-1");
+                int comida = ciu.getRecurso().getComida();
+                if (comida > 100) {
+                    soldadoNuevo.setPosicion(celdaAdyacente.getPosicion());
+                    celdaAdyacente.setPersonaje(soldadoNuevo);
+                    ciu.getRecurso().setComida(comida - 100);
+                    Edificio casa = null;
+                    casa = devolverEdificio("Casa-1");
+                    int cap = casa.getCapacidad();
+                    edificio.setCapacidad(cap - 1);
+                    System.out.println("Te quedan " + edificio.getCapacidad() + " unidades de capacidad de alojamiento");
+
+                    System.out.println("El " + soldadoNuevo.getNombre() + " se ha encuentra a la posicion " + soldadoNuevo.getPosicion());
+                    listaPersonajes.put(soldadoNuevo.getNombre(), soldadoNuevo);
+                    contadorSoldados++;
+                } else {
+                    System.out.println("No hay suficientes recursos para crear este personaje. Hay " + comida + " unidades de comida y se necesitan 100");
+                }
+
+            }
+        } else {
+            System.out.println("El personaje que quiere crear no existe");
         }
-        else if("casa".equals(celda)){
-            System.out.println("No se puede almacenar recursos en una casa");
+
+    }
+
+    public void construirEdificio(Personaje personaje, String tipo, String direccion) {
+
+        if ("casa".equals(tipo)) {
+            String casa = "Casa-";
+            String numero = "";
+            numero = Integer.toString(contadorCasas + 1);
+            String total = casa + numero;
+
+            Edificio nuevaCasa = new Edificio(total, tipo);
+            Celda celdaAdyacente = devolverCeldaAdyacente(personaje.getPosicion(), direccion);
+            if ("pradera".equals(celdaAdyacente.getTipo())) {
+                Edificio ciu = null;
+                ciu = devolverEdificio("Ciudadela-1");
+                System.out.println("Coste del edificio: " + nuevaCasa.getRecurso().getMadera() + " unidades de madera y " + nuevaCasa.getRecurso().getPiedra() + " de piedra");
+                int madera = ciu.getRecurso().getMadera();
+                int piedra = ciu.getRecurso().getPiedra();
+                if (madera > 1000 && piedra > 800) {
+                    ciu.getRecurso().setMadera(madera - 1000);
+                    ciu.getRecurso().setPiedra(piedra - 800);
+
+                    nuevaCasa.setPosicion(celdaAdyacente.getPosicion());
+                    celdaAdyacente.setEdificio(nuevaCasa);
+                    listaEdificios.put(nuevaCasa.getNombre(), nuevaCasa);
+                    System.out.println("Se ha construido una casa en la posicion" + nuevaCasa.getPosicion());
+                    contadorCasas++;
+
+                } else {
+                    System.out.println("No hay suficientes recursos para construir el edificio. Hay " + madera + "unidades de madera y " + piedra + " unidades de piedra.");
+                }
+
+            } else {
+                System.out.println("La celda destino no es transitable");
+            }
+        } else if ("cuartel".equals(tipo)) {
+            String cuartel = "Cuartel-";
+            String numero = "";
+            numero = Integer.toString(contadorCuarteles + 1);
+            String total = cuartel + numero;
+
+            Edificio nuevoCuartel = new Edificio(total, tipo);
+            Celda celdaAdyacente = devolverCeldaAdyacente(personaje.getPosicion(), direccion);
+            if ("pradera".equals(celdaAdyacente.getTipo())) {
+                Edificio ciu = null;
+                ciu = devolverEdificio("Ciudadela-1");
+                System.out.println("Coste del edificio: " + nuevoCuartel.getRecurso().getMadera() + " unidades de madera y " + nuevoCuartel.getRecurso().getPiedra() + " de piedra");
+                int madera = ciu.getRecurso().getMadera();
+                int piedra = ciu.getRecurso().getPiedra();
+                if (madera > 1000 && piedra > 800) {
+                    ciu.getRecurso().setMadera(madera - 1000);
+                    ciu.getRecurso().setPiedra(piedra - 800);
+
+                    nuevoCuartel.setPosicion(celdaAdyacente.getPosicion());
+                    celdaAdyacente.setEdificio(nuevoCuartel);
+                    listaEdificios.put(nuevoCuartel.getNombre(), nuevoCuartel);
+                    System.out.println("Se ha construido una cuartel en la posicion" + nuevoCuartel.getPosicion());
+                    contadorCuarteles++;
+
+                } else {
+                    System.out.println("No hay suficientes recursos para construir el edificio. Hay " + madera + "unidades de madera y " + piedra + " unidades de piedra.");
+                }
+
+            } else {
+                System.out.println("El edificio que desea construir no existe");
+            }
+
         }
-        
-        else if("cuartel".equals(celda)){
-            System.out.println("No se puede almacenar recursos en un cuartel");
-        }
-        
+
     }
     
     public void almacenarRecursos(Personaje personaje, String direccion){
