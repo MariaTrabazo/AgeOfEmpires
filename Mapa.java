@@ -496,18 +496,18 @@ public class Mapa {
         
         if("ciudadela".equals(celda.getTipo())){
             if("piedra".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setPiedra(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getPiedra());
-               personaje.setCapacidadRecoleccion(0);
+               celda.getEdificio().getRecurso().setPiedra(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getPiedra());
+               personaje.setCantidadAlmacenada(0);
            } 
            
             else if("madera".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setMadera(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getMadera());
-               personaje.setCapacidadRecoleccion(0);
+               celda.getEdificio().getRecurso().setMadera(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getMadera());
+               personaje.setCantidadAlmacenada(0);
            }
            
             else if("comida".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setComida(personaje.getCapacidadRecoleccion() + celda.getEdificio().getRecurso().getComida());
-               personaje.setCapacidadRecoleccion(0);
+               celda.getEdificio().getRecurso().setComida(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getComida());
+               personaje.setCantidadAlmacenada(0);
            }
         }
         else if("casa".equals(celda.getTipo())){
@@ -524,9 +524,9 @@ public class Mapa {
         Celda celdaAux=devolverCeldaAdyacente(paisano.getPosicion(), direccion);
         
             if("cantera".equals(celdaAux.getTipo())){
-               if(paisano.getCapacidadRecoleccion()<1000){
+               if(paisano.getCantidadAlmacenada()<paisano.getCapacidadRecoleccion()){
                     celdaAux.getContenedor().setCantidadPiedra(celdaAux.getContenedor().getCantidadPiedra()-10);
-                    paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion()+10);
+                    paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada()+10);
                     paisano.setTipoRecurso("piedra");
                     if(celdaAux.getContenedor().getCantidadPiedra()==0){
                         celdaAux.setTipo("pradera");
@@ -540,9 +540,9 @@ public class Mapa {
                    
             }
             else if("bosque".equals(celdaAux.getTipo())){
-               if(paisano.getCapacidadRecoleccion()<1000){
+               if(paisano.getCantidadAlmacenada()<paisano.getCapacidadRecoleccion()){
                     celdaAux.getContenedor().setCantidadMadera(celdaAux.getContenedor().getCantidadMadera()-10);
-                    paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion()+10);
+                    paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada()+10);
                     paisano.setTipoRecurso("madera");
                     if(celdaAux.getContenedor().getCantidadMadera()==0){
                         celdaAux.setTipo("pradera");
@@ -555,9 +555,9 @@ public class Mapa {
                    
             }
             else if("arbusto".equals(celdaAux.getTipo())){
-               if(paisano.getCapacidadRecoleccion()<1000){
+               if(paisano.getCantidadAlmacenada()<paisano.getCapacidadRecoleccion()){
                     celdaAux.getContenedor().setCantidadComida(celdaAux.getContenedor().getCantidadComida()-10);
-                    paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion()+10);
+                    paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada()+10);
                     paisano.setTipoRecurso("comida");
                     if(celdaAux.getContenedor().getCantidadComida()==0){
                         celdaAux.setTipo("pradera");
