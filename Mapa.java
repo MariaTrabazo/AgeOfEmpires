@@ -13,84 +13,91 @@ import java.util.ArrayList;
  */
 public class Mapa {
     
-    private ArrayList <ArrayList<Celda>> miMapa;
-    private HashMap <String, Personaje> listaPersonajes;
-    private HashMap <String, Edificio> listaEdificios;
+   private ArrayList<ArrayList<Celda>> miMapa;
+    private HashMap<String, Personaje> listaPersonajes;
+    private HashMap<String, Edificio> listaEdificios;
+    private HashMap<String, ContenedoresRecurso> listaContenedores;
     private int contadorCiudadelas;
     private int contadorBosques;
     private int contadorArbustos;
-    private int contadorCantera; 
+    private int contadorCanteras;
     private int contadorPaisanos = 1;
     private int contadorSoldados = 0;
     private int contadorCasas = 0;
     private int contadorCuarteles = 0;
-    
-    
 
     public Mapa(int filas, int columnas) {
-        miMapa= new ArrayList<>();
-        listaPersonajes= new HashMap <>();
-        listaEdificios= new HashMap <>();
-        
-        //if(miMapa.size()!=0){
-            for(int i=0; i<filas; i++){
-                ArrayList <Celda> fila= new ArrayList<>();
-                miMapa.add(fila);
-                for(int j=0; j<columnas; j++){
-                    Celda celdaAux= new Celda(i, j);
-                    //celdaAux.getPosicion().setX(i);
-                    //celdaAux.getPosicion().setY(j);
-                    if(i==0 && j==1){
-                        Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
-                        Posicion p = new Posicion(i, j);
-                        edificio1.setPosicion(p);
-                        celdaAux.setTipo("ciudadela");
-                        celdaAux.setEdificio(edificio1);
-                        listaEdificios.put("Ciudadela-1", edificio1);
-                    }
-                    
-                    else if (i==2 && j==2){
-                        celdaAux.setTipo("pradera"); 
-                        Personaje personaje1=new Personaje("Paisano-1","paisano"); 
-                        Posicion p2=new Posicion(i,j);
-                        personaje1.setPosicion(p2);
-                        celdaAux.setPersonaje(personaje1);
-                        listaPersonajes.put("Paisano-1", personaje1);
-                    }
-                    
-                    else if(i==1 && j==4){
-                        ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto", "arbusto");
-                        Posicion p3 = new Posicion(i, j);
-                        contenedor1.setPosicion(p3);
-                        celdaAux.setTipo("arbusto");
-                        celdaAux.setContenedor(contenedor1);//va a haber que añadir un contador 
-                    }
-                    else if(i==3 && j==2){
-                       ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque", "bosque");
-                        Posicion p4 = new Posicion(i, j);
-                        contenedor2.setPosicion(p4);
-                        celdaAux.setTipo("bosque");
-                        celdaAux.setContenedor(contenedor2);//va a haber que añadir un contador 
-                    }
-                    else if(i==0 && j==3){
-                        ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera", "cantera");
-                        Posicion p4 = new Posicion(i, j);
-                        contenedor3.setPosicion(p4);
-                        celdaAux.setTipo("cantera");
-                        celdaAux.setContenedor(contenedor3);//va a haber que añadir un contador 
-                    }
-                    
-                    
-                    fila.add(celdaAux);
+        miMapa = new ArrayList<>();
+        listaPersonajes = new HashMap<>();
+        listaEdificios = new HashMap<>();
+        listaContenedores = new HashMap<>();
+
+        for (int i = 0; i < filas; i++) {
+            ArrayList<Celda> fila = new ArrayList<>();
+            miMapa.add(fila);
+            for (int j = 0; j < columnas; j++) {
+                Celda celdaAux = new Celda(i, j);
+                if (i == 0 && j == 1) {
+                    Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
+
+                    Posicion p = new Posicion(i, j);
+                    edificio1.setPosicion(p);
+                    celdaAux.setTipo("ciudadela");
+                    celdaAux.setEdificio(edificio1);
+                    listaEdificios.put("Ciudadela-1", edificio1);
+                } else if (i == 2 && j == 2) {
+                    celdaAux.setTipo("pradera");
+                    Personaje personaje1 = new Personaje("Paisano-1", "paisano");
+                    Posicion p2 = new Posicion(i, j);
+                    personaje1.setPosicion(p2);
+                    celdaAux.setPersonaje(personaje1);
+                    listaPersonajes.put("Paisano-1", personaje1);
+                } else if (i == 1 && j == 4) {
+                    ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
+                    Posicion p3 = new Posicion(i, j);
+                    contenedor1.setPosicion(p3);
+                    celdaAux.setTipo("arbusto");
+                    celdaAux.setContenedor(contenedor1);
+                    contadorArbustos++;
+                    listaContenedores.put("Arbusto-1", contenedor1);
+                } else if (i == 3 && j == 2) {
+                    ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque-1", "bosque");
+                    Posicion p4 = new Posicion(i, j);
+                    contenedor2.setPosicion(p4);
+                    celdaAux.setTipo("bosque");
+                    celdaAux.setContenedor(contenedor2);
+                    listaContenedores.put("Bosque-1", contenedor2);
+                    contadorBosques++;
+                } else if (i == 0 && j == 3) {
+                    ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera-1", "cantera");
+                    Posicion p4 = new Posicion(i, j);
+                    contenedor3.setPosicion(p4);
+                    celdaAux.setTipo("cantera");
+                    celdaAux.setContenedor(contenedor3);
+                    contadorCanteras++;
+                    listaContenedores.put("Cantera-1", contenedor3);
+                } else if (i == 0 && j == 0) {
+                    Edificio edificio1 = new Edificio("Cuartel-1", "cuartel");
+                    Posicion p = new Posicion(i, j);
+                    edificio1.setPosicion(p);
+                    celdaAux.setTipo("cuartel");
+                    celdaAux.setEdificio(edificio1);
+                    contadorCuarteles++;
+                    listaEdificios.put("Cuartel-1", edificio1);
+                } else if (i == 4 && j == 4) {
+                    Edificio edificio2 = new Edificio("Casa-1", "casa");
+                    Posicion p = new Posicion(i, j);
+                    edificio2.setPosicion(p);
+                    celdaAux.setTipo("casa");
+                    celdaAux.setEdificio(edificio2);
+                    contadorCasas++;
+                    listaEdificios.put("Casa-1", edificio2);
                 }
+
+                fila.add(celdaAux);
             }
-            /*contadorCiudadelas=2;
-            contadorBosques=1;
-            contadorArbustos=2;
-            contadorCantera=1;
-            contadorPersonajes=1;*/
-        //}
-        
+        }
+
     }
 
     public ArrayList<ArrayList<Celda>> getMiMapa() {
@@ -105,11 +112,15 @@ public class Mapa {
         return listaEdificios;
     }
 
+    public HashMap<String, ContenedoresRecurso> getListaContendores() {
+        return listaContenedores;
+    }
+
     public int getContadorCiudadelas() {
         return contadorCiudadelas;
     }
 
-   public int getContadorPaisanos() {
+    public int getContadorPaisanos() {
         return contadorPaisanos;
     }
 
@@ -137,7 +148,11 @@ public class Mapa {
         this.listaEdificios = listaEdificios;
     }
 
-     public void setContadorPaisanos(int contadorPaisanos) {
+    public void setContadorCiudadelas(int contadorCiudadelas) {
+        this.contadorCiudadelas = contadorCiudadelas;
+    }
+
+    public void setContadorPaisanos(int contadorPaisanos) {
         this.contadorPaisanos = contadorPaisanos;
     }
 
@@ -152,80 +167,123 @@ public class Mapa {
     public void setContadorCuarteles(int contadorCuarteles) {
         this.contadorCuarteles = contadorCuarteles;
     }
-    
-    
-    public void dibujarMapa(){
-        
-        String devolverMapa="\n";
-        int columna, fila;
-      
-        for (fila=0; fila<miMapa.size(); fila++){
-            for (columna=0; columna<miMapa.get(0).size(); columna++){
-                Celda celdaAuxiliar= miMapa.get(fila).get(columna);
-                switch(celdaAuxiliar.getTipo()){
+
+    public void dibujarMapa() {
+
+        String devolverMapa = "\n";
+        int columna = 0, fila;
+
+        for (fila = 0; fila < miMapa.size(); fila++) {
+            for (columna = 0; columna < miMapa.get(0).size(); columna++) {
+                Celda celdaAuxiliar = miMapa.get(fila).get(columna);
+                switch (celdaAuxiliar.getTipo()) {
                     case "pradera":
-                        if(celdaAuxiliar.getPersonaje()!=null){
-                            if("paisano".equals(celdaAuxiliar.getPersonaje().getTipo())){
-                                String[] personaje=celdaAuxiliar.getPersonaje().getNombre().split("-");
-                                devolverMapa+="\t" + "P"+personaje[1];
+                        if (celdaAuxiliar.getPersonaje() != null) {
+                            if (celdaAuxiliar.getPersonaje().getTipo().equals("paisano")) {
+                                String[] personaje = celdaAuxiliar.getPersonaje().getNombre().split("-");
+                                devolverMapa += "\t" + "P" + personaje[1];
+                            } else if (celdaAuxiliar.getPersonaje().getTipo().equals("soldado")) {
+                                String[] personaje = celdaAuxiliar.getPersonaje().getNombre().split("-");
+                                devolverMapa += "\t" + "S" + personaje[1];
                             }
-                            else if("soldado".equals(celdaAuxiliar.getPersonaje().getTipo())){
-                                String[] personaje=celdaAuxiliar.getPersonaje().getNombre().split("-");
-                                devolverMapa+="\t" + "S"+personaje[1];
-                            }
-                        }
-                        else{
-                            devolverMapa+="\t" + "@";
+                        } else {
+                            devolverMapa += "\t" + "@";
                         }
                         break;
                     case "arbusto":
-                        devolverMapa+="\t" + "A";
+                        String[] arbustos = celdaAuxiliar.getContenedor().getNombre().split("-");
+                        devolverMapa += "\t" + "A" + arbustos[1];
                         break;
                     case "cantera":
-                        devolverMapa+="\t" + "Can";
+                        String[] canteras = celdaAuxiliar.getContenedor().getNombre().split("-");
+                        devolverMapa += "\t" + "Can" + canteras[1];
                         break;
                     case "bosque":
-                        devolverMapa+="\t" + "B";
+                        String[] bosques = celdaAuxiliar.getContenedor().getNombre().split("-");
+                        devolverMapa += "\t" + "B" + bosques[1];
                         break;
                     case "casa":
-                        String[] casas=celdaAuxiliar.getEdificio().getNombre().split("-");
-                        devolverMapa+="\t" + "Cas"+casas[1];
+                        String[] casas = celdaAuxiliar.getEdificio().getNombre().split("-");
+                        devolverMapa += "\t" + "Cas" + casas[1];
                         break;
                     case "ciudadela":
-                        String[] ciudadelas=celdaAuxiliar.getEdificio().getNombre().split("-");
-                        devolverMapa+="\t" + "Ciu"+ciudadelas[1];
+                        String[] ciudadelas = celdaAuxiliar.getEdificio().getNombre().split("-");
+                        devolverMapa += "\t" + "Ciu" + ciudadelas[1];
                         break;
                     case "cuartel":
-                        String[] cuarteles=celdaAuxiliar.getEdificio().getNombre().split("-");
-                        devolverMapa+="\t" + "Cuar"+cuarteles[1];
+                        String[] cuarteles = celdaAuxiliar.getEdificio().getNombre().split("-");
+                        devolverMapa += "\t" + "Cuar" + cuarteles[1];
                         break;
                 }
-                
+
+            }
+            devolverMapa += "\n";
+
         }
-        devolverMapa+="\n";
-        
-      }
-      System.out.println(devolverMapa);
+        System.out.println(devolverMapa);
     }
-    
-    public void listarPersonajes(){
-        Personaje personajeResultado=null;
-        for(String key: listaPersonajes.keySet()){
-            personajeResultado=listaPersonajes.get(key);
+
+    public void listarPersonajes() {
+        Personaje personajeResultado = null;
+        for (String key : listaPersonajes.keySet()) {
+            personajeResultado = listaPersonajes.get(key);
             System.out.println(personajeResultado.getNombre() + " " + personajeResultado.getPosicion());
-            
+
         }
-        
+
     }
-    
-    public void listarEdificios(){
-        Edificio edificioResultado=null;
-         for(String key: listaEdificios.keySet()){
-            edificioResultado=listaEdificios.get(key);
+
+    public void listarEdificios() {
+        Edificio edificioResultado = null;
+        for (String key : listaEdificios.keySet()) {
+            edificioResultado = listaEdificios.get(key);
             System.out.println(edificioResultado.getNombre() + " " + edificioResultado.getPosicion());
-            
+
         }
-        
+
+    }
+
+    public void listarContenedores() {
+        ContenedoresRecurso contenedorResultado = null;
+        for (String key : listaContenedores.keySet()) {
+            contenedorResultado = listaContenedores.get(key);
+            System.out.println(contenedorResultado.getNombre() + " " + contenedorResultado.getPosicion());
+
+        }
+
+    }
+
+    public Personaje devolverPersonaje(String nombre) {
+        Personaje personajeAux = null;
+        for (String key : listaPersonajes.keySet()) {
+            personajeAux = listaPersonajes.get(key);
+            if (personajeAux.getNombre().equals(nombre)) {
+                return personajeAux;
+            }
+        }
+        return null;
+    }
+
+    public Edificio devolverEdificio(String nombre) {
+        Edificio edificioAux = null;
+        for (String key : listaEdificios.keySet()) {
+            edificioAux = listaEdificios.get(key);
+            if (edificioAux.getNombre().equals(nombre)) {
+                return edificioAux;
+            }
+        }
+        return null;
+    }
+
+    public ContenedoresRecurso devolverContenedor(String nombre) {
+        ContenedoresRecurso contenedorAux = null;
+        for (String key : listaContenedores.keySet()) {
+            contenedorAux = listaContenedores.get(key);
+            if (contenedorAux.getNombre().equals(nombre)) {
+                return contenedorAux;
+            }
+        }
+        return null;
     }
     
     public Personaje devolverPersonaje(String nombre){
