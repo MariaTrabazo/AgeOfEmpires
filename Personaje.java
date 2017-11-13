@@ -167,6 +167,24 @@ public class Personaje {
             System.out.println("Los puntos de saludo son " + salud);
         }
     }
+     
+     public void describirPersonaje(Personaje personaje){
+        
+        if ("paisano".equals(personaje.getTipo())) {
+            System.out.println("La posicion es " + personaje.getPosicion());
+            System.out.println("El ataque es " + personaje.getAtaque());
+            System.out.println("La armadura es " + personaje.getArmadura());
+            System.out.println("Los puntos de salud son " + personaje.getSalud());
+            System.out.println("La capadidad de recoleccion es " + personaje.getCapacidadRecoleccion());
+            System.out.println("La cantidad almacenada es " + personaje.getCantidadAlmacenada());
+        } else if ("soldado".equals(personaje.getTipo())) {
+            System.out.println("La posicion es " + personaje.getPosicion());
+            System.out.println("El ataque es " + personaje.getAtaque());
+            System.out.println("La armadura es " + personaje.getArmadura());
+            System.out.println("Los puntos de salud son " + personaje.getSalud());
+        }
+    }
+     
      public void mirarPersonaje(){
         if("paisano".equals(tipo)){
             System.out.println("Celda de tipo paisano");
