@@ -174,6 +174,21 @@ public class Edificio {
         }
     }
    
+       public void describirEdificio(Edificio edificio){
+        if("ciudadela".equals(edificio.getTipo())){
+            System.out.println("La posicion es " + edificio.getPosicion());
+            System.out.println("La cantidad de comida es " + edificio.getRecurso().getComida() + "\nLa cantidad de madera es " + edificio.getRecurso().getMadera() + "\nLa cantidad de piedra es " + edificio.getRecurso().getPiedra());
+            System.out.println("Los puntos de salud son " + edificio.getPuntosSalud());
+        }
+        else if("casa".equals(edificio.getTipo())){
+            System.out.println("La posicion es " + edificio.getPosicion());
+            System.out.println("Los puntos de salud son " + edificio.getPuntosSalud());
+        }
+        else if("cuartel".equals(edificio.getTipo())){
+            System.out.println("La posicion es " + edificio.getPosicion());
+            System.out.println("Los puntos de salud son " + edificio.getPuntosSalud());
+        }
+   
    public void mirarEdificio(){
           
         if("ciudadela".equals(tipo)){
