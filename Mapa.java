@@ -441,6 +441,7 @@ public class Mapa {
                     ciu.getRecurso().setPiedra(piedra - 800);
 
                     nuevaCasa.setPosicion(celdaAdyacente.getPosicion());
+                    celdaAdyacente.setTipo(tipo);
                     celdaAdyacente.setEdificio(nuevaCasa);
                     listaEdificios.put(nuevaCasa.getNombre(), nuevaCasa);
                     System.out.println("Se ha construido una casa en la posicion" + nuevaCasa.getPosicion());
@@ -472,6 +473,7 @@ public class Mapa {
                     ciu.getRecurso().setPiedra(piedra - 800);
 
                     nuevoCuartel.setPosicion(celdaAdyacente.getPosicion());
+                    celdaAdyacente.setTipo(tipo);
                     celdaAdyacente.setEdificio(nuevoCuartel);
                     listaEdificios.put(nuevoCuartel.getNombre(), nuevoCuartel);
                     System.out.println("Se ha construido una cuartel en la posicion" + nuevoCuartel.getPosicion());
