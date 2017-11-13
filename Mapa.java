@@ -286,27 +286,7 @@ public class Mapa {
         return null;
     }
     
-    public Personaje devolverPersonaje(String nombre){
-        Personaje personajeAux= null;
-        for(String key: listaPersonajes.keySet()){
-            personajeAux=listaPersonajes.get(key);
-            if(personajeAux.getNombre().equals(nombre)){
-                return personajeAux;
-            }      
-        }
-        return null;
-    }
-    
-     public Edificio devolverEdificio(String nombre) {
-        Edificio edificioAux = null;
-        for (String key : listaEdificios.keySet()) {
-            edificioAux = listaEdificios.get(key);
-            if (edificioAux.getNombre().equals(nombre)) {
-                return edificioAux;
-            }
-        }
-        return null;
-    }
+   
 
     public void mirarCelda(Posicion posicion) {
 
@@ -549,86 +529,87 @@ public class Mapa {
 
     }
     
-    public void almacenarRecursos(Personaje personaje, String direccion){
-        Celda celda=devolverCeldaAdyacente(personaje.getPosicion(), direccion);
-        
-        if("ciudadela".equals(celda.getTipo())){
-            if("piedra".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setPiedra(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getPiedra());
-               personaje.setCantidadAlmacenada(0);
-           } 
-           
-            else if("madera".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setMadera(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getMadera());
-               personaje.setCantidadAlmacenada(0);
-           }
-           
-            else if("comida".equals(personaje.getTipoRecurso())){
-               celda.getEdificio().getRecurso().setComida(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getComida());
-               personaje.setCantidadAlmacenada(0);
-           }
-        }
-        else if("casa".equals(celda.getTipo())){
+    public void almacenarRecursos(Personaje personaje, String direccion) {
+        Celda celda = devolverCeldaAdyacente(personaje.getPosicion(), direccion);
+
+        if ("ciudadela".equals(celda.getTipo())) {
+            if ("piedra".equals(personaje.getTipoRecurso())) {
+                celda.getEdificio().getRecurso().setPiedra(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getPiedra());
+                personaje.setCapacidadRecoleccion(personaje.getCapacidadRecoleccion() + personaje.getCantidadAlmacenada());
+                personaje.setCantidadAlmacenada(0);
+                System.out.println("Almacenadas 100 unidades de piedra en la ciudadela");
+            } else if ("madera".equals(personaje.getTipoRecurso())) {
+                celda.getEdificio().getRecurso().setMadera(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getMadera());
+                personaje.setCapacidadRecoleccion(personaje.getCapacidadRecoleccion() + personaje.getCantidadAlmacenada());
+                personaje.setCantidadAlmacenada(0);
+                System.out.println("Almacenadas 100 unidades de madera en la ciudadela");
+            } else if ("comida".equals(personaje.getTipoRecurso())) {
+                celda.getEdificio().getRecurso().setComida(personaje.getCantidadAlmacenada() + celda.getEdificio().getRecurso().getComida());
+                personaje.setCapacidadRecoleccion(personaje.getCapacidadRecoleccion() + personaje.getCantidadAlmacenada());
+                personaje.setCantidadAlmacenada(0);
+                System.out.println("Almacenadas 100 unidades de comida en la ciudadela");
+            }
+        } else if ("casa".equals(celda.getTipo())) {
             System.out.println("No se puede almacenar recursos en una casa");
-        }
-        
-        else if("cuartel".equals(celda.getTipo())){
+        } else if ("cuartel".equals(celda.getTipo())) {
             System.out.println("No se puede almacenar recursos en un cuartel");
         }
-        
+
     }
-    
-    public void recolectarRecurso(Personaje paisano,String direccion){
-        Celda celdaAux=devolverCeldaAdyacente(paisano.getPosicion(), direccion);
-        
-            if("cantera".equals(celdaAux.getTipo())){
-               if(paisano.getCantidadAlmacenada()<paisano.getCapacidadRecoleccion()){
-                    celdaAux.getContenedor().setCantidadPiedra(celdaAux.getContenedor().getCantidadPiedra()-10);
-                    paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada()+10);
-                    paisano.setTipoRecurso("piedra");
-                    if(celdaAux.getContenedor().getCantidadPiedra()==0){
-                        celdaAux.setTipo("pradera");
-                        celdaAux.getContenedor().setRecurso(null);
-                       
-                    }
-               }
-               else{
-                   System.out.println("Ya no se puede recolectar mas.");
-               }
-                   
+
+    public void recolectarRecurso(Personaje paisano, String direccion) {
+        Celda celdaAux = devolverCeldaAdyacente(paisano.getPosicion(), direccion);
+
+        if ("cantera".equals(celdaAux.getTipo())) {
+            if (paisano.getCantidadAlmacenada() < paisano.getCapacidadRecoleccion()) {
+                celdaAux.getContenedor().setCantidadPiedra(celdaAux.getContenedor().getCantidadPiedra() - 100);
+                paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada() + 100);
+                paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion() - 100);
+                System.out.println("Has conseguido 100 unidades de piedra");
+                paisano.setTipoRecurso("piedra");
+                if (celdaAux.getContenedor().getCantidadPiedra() == 0) {
+                    celdaAux.setTipo("pradera");
+                    celdaAux.getContenedor().setRecurso(null);
+
+                }
+            } else {
+                System.out.println("Ya no se puede recolectar mas.");
             }
-            else if("bosque".equals(celdaAux.getTipo())){
-               if(paisano.getCantidadAlmacenada()<paisano.getCapacidadRecoleccion()){
-                    celdaAux.getContenedor().setCantidadMadera(celdaAux.getContenedor().getCantidadMadera()-10);
-                    paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada()+10);
-                    paisano.setTipoRecurso("madera");
-                    if(celdaAux.getContenedor().getCantidadMadera()==0){
-                        celdaAux.setTipo("pradera");
-                        celdaAux.getContenedor().setRecurso(null);
-                    }
-               }
-               else{
-                   System.out.println("Ya no se puede recolectar mas.");
-               }
-                   
+
+        } else if ("bosque".equals(celdaAux.getTipo())) {
+            if (paisano.getCantidadAlmacenada() < paisano.getCapacidadRecoleccion()) {
+                celdaAux.getContenedor().setCantidadMadera(celdaAux.getContenedor().getCantidadMadera() - 100);
+                paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada() + 100);
+                paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion() - 100);
+                System.out.println("Has conseguido 100 unidades de madera");
+                paisano.setTipoRecurso("madera");
+                if (celdaAux.getContenedor().getCantidadMadera() == 0) {
+                    celdaAux.setTipo("pradera");
+                    celdaAux.getContenedor().setRecurso(null);
+                }
+            } else {
+                System.out.println("Ya no se puede recolectar mas.");
             }
-            else if("arbusto".equals(celdaAux.getTipo())){
-               if(paisano.getCantidadAlmacenada()<paisano.getCapacidadRecoleccion()){
-                    celdaAux.getContenedor().setCantidadComida(celdaAux.getContenedor().getCantidadComida()-10);
-                    paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada()+10);
-                    paisano.setTipoRecurso("comida");
-                    if(celdaAux.getContenedor().getCantidadComida()==0){
-                        celdaAux.setTipo("pradera");
-                        celdaAux.getContenedor().setRecurso(null);
-                    }
-               }
-               else{
-                   System.out.println("Ya no se puede recolectar mas.");
-               }
-                  
+
+        } else if ("arbusto".equals(celdaAux.getTipo())) {
+            if (paisano.getCantidadAlmacenada() < paisano.getCapacidadRecoleccion()) {
+                celdaAux.getContenedor().setCantidadComida(celdaAux.getContenedor().getCantidadComida() - 100);
+                paisano.setCantidadAlmacenada(paisano.getCantidadAlmacenada() + 100);
+                paisano.setCapacidadRecoleccion(paisano.getCapacidadRecoleccion() - 100);
+                System.out.println("Has conseguido 100 unidades de comida");
+                paisano.setTipoRecurso("comida");
+                if (celdaAux.getContenedor().getCantidadComida() == 0) {
+                    celdaAux.setTipo("pradera");
+                    celdaAux.getContenedor().setRecurso(null);
+                }
+            } else {
+                System.out.println("Ya no se puede recolectar mas.");
             }
+
+        } else {
+            System.out.println("La celda destino no es un contenedor de recursos");
+        }
     }
-    
     public boolean buscarCiudadelaReparar(){
         int capacidad1=0, capacidad2=0;
             for(int i=0; i<5; i++){
