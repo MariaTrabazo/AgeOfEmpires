@@ -138,6 +138,33 @@ public class AgeOfEmpires_parte1 {
                         } 
                     }
                 break;
+                    
+                    case "recolectar":
+                    if(comando.length!=3){
+                       System.out.println("Error de sintaxis."); 
+                    }
+                    else{
+                       Personaje p4= mapaPrueba.devolverPersonaje(comando[1]);
+                       mapaPrueba.recolectarRecurso(p4,comando[2]);
+                       if(p4.getCapacidadRecoleccion()<=80){
+                        System.out.println("Unidades recolectadas: " + p4.getCapacidadRecoleccion());
+                        mapaPrueba.dibujarMapa();
+                       }
+                       
+                       
+                    }
+                break;
+                case "reparar":
+                    if(comando.length!=3){
+                       System.out.println("Error de sintaxis."); 
+                    }
+                    else{
+                       Personaje p6= mapaPrueba.devolverPersonaje(comando[1]);
+                       mapaPrueba.reparar(p6,comando[2]);
+                       mapaPrueba.dibujarMapa();
+                       
+                    }
+                    break;
             }
         }
         
