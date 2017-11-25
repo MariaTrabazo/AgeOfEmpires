@@ -30,7 +30,7 @@ public class Mapa {
     private int contadorCasas = 0;
     private int contadorCuarteles = 0;
 
-    public Mapa(int filas, int columnas) {
+   public Mapa(int filas, int columnas, Civilizacion civ) {
         miMapa = new ArrayList<>();
         listaPersonajes = new HashMap<>();
         listaEdificios = new HashMap<>();
@@ -42,50 +42,107 @@ public class Mapa {
             miMapa.add(fila);
             for (int j = 0; j < columnas; j++) {
                 Celda celdaAux = new Celda(i, j);
-                if (i == 0 && j == 1) {
-                    Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
+                if ("Griega".equals(civ.getNombre())) {
+                    
+                    if (i == 0 && j == 1) {
+                        Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
 
-                    Posicion p = new Posicion(i, j);
-                    edificio1.setPosicion(p);
-                    celdaAux.setTipo("ciudadela");
-                    celdaAux.setEdificio(edificio1);
-                    listaEdificios.put("Ciudadela-1", edificio1);
-                } else if (i == 2 && j == 2) {
-                    celdaAux.setTipo("pradera");
-                    Posicion p2 = new Posicion(i, j);
-                    personaje1.setPosicion(p2);
-                    celdaAux.setPersonaje(personaje1);
-                    listaPersonajes.put("Paisano-1", personaje1);
-                    celdaAux.setVisible(true);
-                } else if (i == 2 && j == 4) {
-                    ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
-                    Posicion p3 = new Posicion(i, j);
-                    contenedor1.setPosicion(p3);
-                    celdaAux.setTipo("arbusto");
-                    celdaAux.setContenedor(contenedor1);
-                    contadorArbustos++;
-                    listaContenedores.put("Arbusto-1", contenedor1);
-                } else if (i == 3 && j == 2) {
-                    ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque-1", "bosque");
-                    Posicion p4 = new Posicion(i, j);
-                    contenedor2.setPosicion(p4);
-                    celdaAux.setTipo("bosque");
-                    celdaAux.setContenedor(contenedor2);
-                    listaContenedores.put("Bosque-1", contenedor2);
-                    contadorBosques++;
-                } else if (i == 0 && j == 3) {
-                    ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera-1", "cantera");
-                    Posicion p4 = new Posicion(i, j);
-                    contenedor3.setPosicion(p4);
-                    celdaAux.setTipo("cantera");
-                    celdaAux.setContenedor(contenedor3);
-                    contadorCanteras++;
-                    listaContenedores.put("Cantera-1", contenedor3);
-                } 
+                        Posicion p = new Posicion(i, j);
+                        edificio1.setPosicion(p);
+                        celdaAux.setTipo("ciudadela");
+                        celdaAux.setEdificio(edificio1);
+                        listaEdificios.put("Ciudadela-1", edificio1);
+                        civ.getEdificios().put("Ciudadela-1", edificio1);
+                    } else if (i == 2 && j == 2) {
+                        celdaAux.setTipo("pradera");
+                        Posicion p2 = new Posicion(i, j);
+                        personaje1.setPosicion(p2);
+                        celdaAux.setPersonaje(personaje1);
+                        listaPersonajes.put("Paisano-1", personaje1);
+                        civ.getPersonajes().put("Paisano-1", personaje1);
+                        //civ.setPersonajes(listaPersonajes);
+                        celdaAux.setVisible(true);
+                    } else if (i == 2 && j == 4) {
+                        ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
+                        Posicion p3 = new Posicion(i, j);
+                        contenedor1.setPosicion(p3);
+                        celdaAux.setTipo("arbusto");
+                        celdaAux.setContenedor(contenedor1);
+                        contadorArbustos++;
+                        listaContenedores.put("Arbusto-1", contenedor1);
+                    } else if (i == 3 && j == 2) {
+                        ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque-1", "bosque");
+                        Posicion p4 = new Posicion(i, j);
+                        contenedor2.setPosicion(p4);
+                        celdaAux.setTipo("bosque");
+                        celdaAux.setContenedor(contenedor2);
+                        listaContenedores.put("Bosque-1", contenedor2);
+                        contadorBosques++;
+                    } else if (i == 0 && j == 3) {
+                        ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera-1", "cantera");
+                        Posicion p4 = new Posicion(i, j);
+                        contenedor3.setPosicion(p4);
+                        celdaAux.setTipo("cantera");
+                        celdaAux.setContenedor(contenedor3);
+                        contadorCanteras++;
+                        listaContenedores.put("Cantera-1", contenedor3);
+                    }
+                    
+                    fila.add(celdaAux);
+                } else if ("Romana".equals(civ.getNombre())) {
+                    
+                    if (i == 2 && j == 1) {
+                        Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
 
-                fila.add(celdaAux);
+                        Posicion p = new Posicion(i, j);
+                        edificio1.setPosicion(p);
+                        celdaAux.setTipo("ciudadela");
+                        celdaAux.setEdificio(edificio1);
+                        listaEdificios.put("Ciudadela-1", edificio1);
+                        civ.getEdificios().put("Ciudadela-1", edificio1);
+                        //civ.setEdificios(listaEdificios);
+                    } else if (i == 3 && j == 3) {
+                        celdaAux.setTipo("pradera");
+                        Posicion p2 = new Posicion(i, j);
+                        personaje1.setPosicion(p2);
+                        celdaAux.setPersonaje(personaje1);
+                        listaPersonajes.put("Paisano-1", personaje1);
+                        civ.getPersonajes().put("Paisano-1", personaje1);
+                        //civ.setPersonajes(listaPersonajes);
+                        celdaAux.setVisible(true);
+                    } else if (i == 0 && j == 4) {
+                        ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
+                        Posicion p3 = new Posicion(i, j);
+                        contenedor1.setPosicion(p3);
+                        celdaAux.setTipo("arbusto");
+                        celdaAux.setContenedor(contenedor1);
+                        contadorArbustos++;
+                        listaContenedores.put("Arbusto-1", contenedor1);
+                    } else if (i == 1 && j == 2) {
+                        ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque-1", "bosque");
+                        Posicion p4 = new Posicion(i, j);
+                        contenedor2.setPosicion(p4);
+                        celdaAux.setTipo("bosque");
+                        celdaAux.setContenedor(contenedor2);
+                        listaContenedores.put("Bosque-1", contenedor2);
+                        contadorBosques++;
+                    } else if (i == 5 && j == 3) {
+                        ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera-1", "cantera");
+                        Posicion p4 = new Posicion(i, j);
+                        contenedor3.setPosicion(p4);
+                        celdaAux.setTipo("cantera");
+                        celdaAux.setContenedor(contenedor3);
+                        contadorCanteras++;
+                        listaContenedores.put("Cantera-1", contenedor3);
+                    }
+
+                    fila.add(celdaAux);
+
+                }
+
             }
         }
+        listaCivilizaciones.put(civ.getNombre(), civ);
         Celda celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "NORTE");
         celdaAuxAdyacente.setVisible(true);
         celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "SUR");
@@ -133,10 +190,6 @@ public class Mapa {
         return contadorCuarteles;
     }
 
-    public HashMap<String, ContenedoresRecurso> getListaContenedores() {
-        return listaContenedores;
-    }
-
     public int getContadorBosques() {
         return contadorBosques;
     }
@@ -147,6 +200,14 @@ public class Mapa {
 
     public int getContadorCanteras() {
         return contadorCanteras;
+    }
+    
+     public HashMap<String, Civilizacion> getListaCivilizaciones() {
+        return listaCivilizaciones;
+    }
+
+    public String getCivilizacionActiva() {
+        return civilizacionActiva;
     }
 
     public void setMiMapa(ArrayList<ArrayList<Celda>> miMapa) {
@@ -196,8 +257,16 @@ public class Mapa {
     public void setContadorCuarteles(int contadorCuarteles) {
         this.contadorCuarteles = contadorCuarteles;
     }
+    
+    public void setListaCivilizaciones(HashMap<String, Civilizacion> listaCivilizaciones) {
+        this.listaCivilizaciones = listaCivilizaciones;
+    }
 
-    public void dibujarMapa() {
+    public void setCivilizacionActiva(String civilizacionActiva) {
+        this.civilizacionActiva = civilizacionActiva;
+    }
+
+   public void dibujarMapa(Civilizacion civ) {
 
         String devolverMapa = "\n";
         int columna = 0, fila;
@@ -205,7 +274,7 @@ public class Mapa {
         for (fila = 0; fila < miMapa.size(); fila++) {
             for (columna = 0; columna < miMapa.get(0).size(); columna++) {
                 Celda celdaAuxiliar = miMapa.get(fila).get(columna);
-                if (celdaAuxiliar.isVisible() && "Griega".equals(civilizacionActiva)) {
+                if (celdaAuxiliar.isVisible() && "Griega".equals(civ.getNombre())) {
                     switch (celdaAuxiliar.getTipo()) {
                         case "pradera":
                             if (celdaAuxiliar.getPersonaje() != null) {
@@ -246,7 +315,7 @@ public class Mapa {
                             break;
                     }
                 }
-                if (celdaAuxiliar.isVisible() && "Romana".equals(civilizacionActiva)) {//PONER COLORES PARA DIFERENCIARLOS
+                else if(celdaAuxiliar.isVisible() && "Romana".equals(civ.getNombre())) {//PONER COLORES PARA DIFERENCIARLOS
                     switch (celdaAuxiliar.getTipo()) {
                         case "pradera":
                             if (celdaAuxiliar.getPersonaje() != null) {
@@ -286,8 +355,7 @@ public class Mapa {
                             devolverMapa += "\t" + "Cuar" + cuarteles[1];
                             break;
                     }
-                }
-                else {
+                } else {
                     devolverMapa += "\t" + "·";
                 }
 
@@ -369,6 +437,16 @@ public class Mapa {
             }
         }
         return null;
+    }
+    
+     public void listarCivilizaciones() {
+        Civilizacion civilizacionResultado = null;
+        for (String key : listaCivilizaciones.keySet()) {
+            civilizacionResultado = listaCivilizaciones.get(key);
+            System.out.println(civilizacionResultado.getNombre());
+
+        }
+
     }
 
     public void mover(Personaje personaje, String direccion) {
@@ -779,5 +857,21 @@ public class Mapa {
     
     public void preguntarCivilizacionActia(){
         System.out.println("La civilizacion activa es: " + civilizacionActiva);
+    }
+    
+    public void cambiarCivilizacion(Civilizacion civ){
+        
+        
+        if("Griega".equals(civ.getNombre()) && civ.isActiva()){
+            civ.setActiva(false);
+            Civilizacion nueva = new Civilizacion("Romana", true);
+            Mapa m = new Mapa(5,5,nueva);
+            m.dibujarMapa(nueva);
+        }
+        else if("Romana".equals(civ.getNombre()) && civ.isActiva()){
+            civ.setNombre(civilizacionActiva);
+            
+        } //FALTA ACABAR
+        
     }
 }
