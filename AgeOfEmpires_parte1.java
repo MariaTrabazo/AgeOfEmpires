@@ -20,7 +20,8 @@ public class AgeOfEmpires_parte1 {
         // TODO code application logic here
         
         
-        Mapa mapaPrueba= new Mapa(5, 5);
+        Civilizacion civ = new Civilizacion("Griega", true);
+        Mapa mapaPrueba = new Mapa(5, 5, civ);
         boolean instruccion= true;
         Scanner scanner = new Scanner(System.in);
         
@@ -33,7 +34,7 @@ public class AgeOfEmpires_parte1 {
                     instruccion=false;
                     break;
                 case "dibujar":
-                    mapaPrueba.dibujarMapa();
+                    mapaPrueba.dibujarMapa(civ);
                     break;
                 case "listar":
                     if(comando.length!=2){
@@ -121,7 +122,7 @@ public class AgeOfEmpires_parte1 {
                         Personaje p1 = null;
                         p1 = mapaPrueba.devolverPersonaje(comando[1]);
                         mapaPrueba.construirEdificio(p1, comando[2], comando[3]);
-                        mapaPrueba.dibujarMapa();
+                        mapaPrueba.dibujarMapa(civ);
                     }
                     break;    
                 case "almacenar":
@@ -148,7 +149,7 @@ public class AgeOfEmpires_parte1 {
                        mapaPrueba.recolectarRecurso(p4,comando[2]);
                        if(p4.getCapacidadRecoleccion()<=80){
                         System.out.println("Unidades recolectadas: " + p4.getCapacidadRecoleccion());
-                        mapaPrueba.dibujarMapa();
+                        mapaPrueba.dibujarMapa(civ);
                        }
                        
                        
@@ -161,8 +162,17 @@ public class AgeOfEmpires_parte1 {
                     else{
                        Personaje p6= mapaPrueba.devolverPersonaje(comando[1]);
                        mapaPrueba.reparar(p6,comando[2]);
-                       mapaPrueba.dibujarMapa();
+                       mapaPrueba.dibujarMapa(civ);
                        
+                    }
+                    break;
+                case "cambiar":
+                    if(comando.length !=2){
+                        System.out.println("El numero de parametros pasados es incorrecto");                        
+                    } else{
+                        Civilizacion c = null;
+                        c = mapaPrueba.devolverCivilizacion(comando[1]);
+                        mapaPrueba.cambiarCivilizacion(c);
                     }
                     break;
             }
