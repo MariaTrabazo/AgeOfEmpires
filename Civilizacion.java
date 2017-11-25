@@ -21,6 +21,8 @@ public class Civilizacion {
     public Civilizacion(String nombre, boolean activa) {
         this.nombre = nombre;
         this.activa = activa;
+        this.edificios = new HashMap<>();
+        this.personajes = new HashMap<>();
     }
 
     public Civilizacion(HashMap<String, Edificio> edificios, HashMap<String, Personaje> personajes) {
