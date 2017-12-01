@@ -3,66 +3,68 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ageofempires_parte1;
+package administrador;
 
+import ageofempires_parte2.Civilizacion;
+import ageofempires_parte2.Edificio;
+import ageofempires_parte2.Personaje;
+import ageofempires_parte2.Posicion;
 import java.util.Scanner;
 
 /**
  *
- * @author María
+ * @author Maria Trabazo y Cristina¨Alvarez
  */
-public class AgeOfEmpires_parte1 {
+public class AgeOfEmpires_parte2 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+
+        Mapa mapaPrueba = new Mapa(5, 5);
         
-        
-        Civilizacion civ = new Civilizacion("Griega", true);
-        Mapa mapaPrueba = new Mapa(5, 5, civ);
-        boolean instruccion= true;
+        mapaPrueba.dibujarMapa();
+
+        boolean instruccion = true;
         Scanner scanner = new Scanner(System.in);
-        
-        while(instruccion){
+
+        while (instruccion) {
             System.out.println("$ ");
-            String linea=scanner.nextLine();
+            String linea = scanner.nextLine();
             String[] comando = linea.split(" ");
-            switch(comando[0]){
+            switch (comando[0]) {
                 case "salir":
-                    instruccion=false;
+                    instruccion = false;
                     break;
-                case "dibujar":
-                    mapaPrueba.dibujarMapa(civ);
+                case "imprimir mapa":
+                    mapaPrueba.dibujarMapa();
                     break;
                 case "listar":
-                    if(comando.length!=2){
+                    if (comando.length != 2) {
                         System.out.println("El numero de parametros pasados es incorrecto");
-                    }
-                    else{
-                        if("personaje".equals(comando[1])){
-                          mapaPrueba.listarPersonajes();
-                        }
-                        else if("edificio".equals(comando[1])){
+                    } else {
+                        if ("personaje".equals(comando[1])) {
+                            mapaPrueba.listarPersonajes();
+                        } else if ("edificio".equals(comando[1])) {
                             mapaPrueba.listarEdificios();
+                        } else if("civilizaciones".equals(comando[1])){
+                            mapaPrueba.listarCivilizaciones();
                         }
                     }
                     break;
                 case "describir":
-                    if(comando.length!=2){
+                    if (comando.length != 2) {
                         System.out.println("El numero de parametros pasados es incorrecto");
-                    }
-                    else{
-                        String nombre[]=comando[1].split("-");
-                        if("Paisano".equals(nombre[0]) || "Soldado".equals(nombre[0])){
-                            Personaje p1=null;
-                            p1=mapaPrueba.devolverPersonaje(comando[1]);
+                    } else {
+                        String nombre[] = comando[1].split("-");
+                        if ("Paisano".equals(nombre[0]) || "Soldado".equals(nombre[0])) {
+                            Personaje p1 = null;
+                            p1 = mapaPrueba.devolverPersonaje(comando[1]);
                             p1.describirPersonaje();
-                        }
-                        else if("Ciudadela".equals(nombre[0]) || "Casa".equals(nombre[0]) || "Cuartel".equals(nombre[0])){
-                            Edificio e1=null;
-                            e1=mapaPrueba.devolverEdificio(comando[1]);
+                        } else if ("Ciudadela".equals(nombre[0]) || "Casa".equals(nombre[0]) || "Cuartel".equals(nombre[0])) {
+                            Edificio e1 = mapaPrueba.devolverEdificio(comando[1]);
                             e1.describirEdificio();
                         }
                     }
@@ -78,22 +80,57 @@ public class AgeOfEmpires_parte1 {
                     }
                     break;
                 case "mover":
-                    if(comando.length!=3){
+                    if (comando.length != 3) {
                         System.out.println("El numero de parametros pasados es incorrecto");
-                    }
-                    else{
-                        String nombre[]=comando[1].split("-");
-                        if("Paisano".equals(nombre[0]) || "Soldado".equals(nombre[0])){
-                            Personaje p1=null;
-                            p1=mapaPrueba.devolverPersonaje(comando[1]);
-                            Posicion posAux=p1.getPosicion();
+                    } else {
+                        String nombre[] = comando[1].split("-");
+                        if ("Paisano".equals(nombre[0]) || "Soldado".equals(nombre[0])) {
+                            Personaje p1 = null;
+                            p1 = mapaPrueba.devolverPersonaje(comando[1]);
+                            Posicion posAux = p1.getPosicion();
                             //System.out.println(posAux);
                             mapaPrueba.mover(p1, comando[2]);
                             //System.out.println(p1.getPosicion());
-                     
+
                         }
                         mapaPrueba.dibujarMapa();
-                        
+
+                    }
+                    break;
+                case "almacenar":
+                    if (comando.length != 3) {
+                        System.out.println("El numero de parametros pasados es incorrecto");
+                    } else {
+                        String nombre[] = comando[1].split("-");
+                        if ("Paisano".equals(nombre[0])) {
+                            Personaje p2 = null;
+                            p2 = mapaPrueba.devolverPersonaje(comando[1]);
+                            mapaPrueba.almacenarRecursos(p2, comando[2]);
+                        }
+                    }
+                    break;
+
+                case "recolectar":
+                    if (comando.length != 3) {
+                        System.out.println("Error de sintaxis.");
+                    } else {
+                        Personaje p4 = mapaPrueba.devolverPersonaje(comando[1]);
+                        mapaPrueba.recolectarRecurso(p4, comando[2]);
+                        if (p4.getCapacidadRecoleccion() <= 80) {
+                            System.out.println("Unidades recolectadas: " + p4.getCapacidadRecoleccion());
+                            mapaPrueba.dibujarMapa();
+                        }
+
+                    }
+                    break;
+                case "reparar":
+                    if (comando.length != 3) {
+                        System.out.println("Error de sintaxis.");
+                    } else {
+                        Personaje p6 = mapaPrueba.devolverPersonaje(comando[1]);
+                        mapaPrueba.reparar(p6, comando[2]);
+                        mapaPrueba.dibujarMapa();
+
                     }
                     break;
                 case "crear":
@@ -105,67 +142,29 @@ public class AgeOfEmpires_parte1 {
                             Edificio e1 = null;
                             e1 = mapaPrueba.devolverEdificio(comando[1]);
                             mapaPrueba.crearPersonaje(e1, comando[2]);
+                            mapaPrueba.dibujarMapa();
 
                         } else if ("Cuartel".equals(nombre[0])) {
                             Edificio e1 = null;
                             e1 = mapaPrueba.devolverEdificio(comando[1]);
                             mapaPrueba.crearPersonaje(e1, comando[2]);
+                            mapaPrueba.dibujarMapa();
                         }
+
                     }
                     break;
 
                 case "construir":
-                    if(comando.length != 4){
+                    if (comando.length != 4) {
                         System.out.println("El numero de parametros pasados es incorrecto");
-                    }
-                    else{
+                    } else {
                         Personaje p1 = null;
                         p1 = mapaPrueba.devolverPersonaje(comando[1]);
                         mapaPrueba.construirEdificio(p1, comando[2], comando[3]);
-                        mapaPrueba.dibujarMapa(civ);
-                    }
-                    break;    
-                case "almacenar":
-                    if(comando.length!=3){
-                        System.out.println("El numero de parametros pasados es incorrecto");
-                    }
-                    
-                    else{
-                       String nombre[]=comando[1].split("-");
-                       if("Paisano".equals(nombre[0])){
-                            Personaje p2=null;
-                            p2=mapaPrueba.devolverPersonaje(comando[1]);
-                            mapaPrueba.almacenarRecursos(p2, comando[2]);
-                        } 
-                    }
-                break;
-                    
-                    case "recolectar":
-                    if(comando.length!=3){
-                       System.out.println("Error de sintaxis."); 
-                    }
-                    else{
-                       Personaje p4= mapaPrueba.devolverPersonaje(comando[1]);
-                       mapaPrueba.recolectarRecurso(p4,comando[2]);
-                       if(p4.getCapacidadRecoleccion()<=80){
-                        System.out.println("Unidades recolectadas: " + p4.getCapacidadRecoleccion());
-                        mapaPrueba.dibujarMapa(civ);
-                       }
-                       
-                       
-                    }
-                break;
-                case "reparar":
-                    if(comando.length!=3){
-                       System.out.println("Error de sintaxis."); 
-                    }
-                    else{
-                       Personaje p6= mapaPrueba.devolverPersonaje(comando[1]);
-                       mapaPrueba.reparar(p6,comando[2]);
-                       mapaPrueba.dibujarMapa(civ);
-                       
+                        mapaPrueba.dibujarMapa();
                     }
                     break;
+                    
                 case "cambiar":
                     if(comando.length !=2){
                         System.out.println("El numero de parametros pasados es incorrecto");                        
@@ -175,9 +174,21 @@ public class AgeOfEmpires_parte1 {
                         mapaPrueba.cambiarCivilizacion(c);
                     }
                     break;
+                    
+                    
+                case "civilizacion":
+                    if(comando.length !=1){
+                        System.out.println("El numero de parametros pasados es incorrecto");
+                    }
+                    else{
+                        mapaPrueba.preguntarCivilizacionActiva();
+                    }
+                    break;
+                    
+                    
             }
         }
-        
+
     }
-    
+
 }
