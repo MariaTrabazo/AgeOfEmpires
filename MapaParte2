@@ -859,19 +859,23 @@ public class Mapa {
         System.out.println("La civilizacion activa es: " + civilizacionActiva);
     }
     
-    public void cambiarCivilizacion(Civilizacion civ){
-        
-        
-        if("Griega".equals(civ.getNombre()) && civ.isActiva()){
-            civ.setActiva(false);
-            Civilizacion nueva = new Civilizacion("Romana", true);
-            Mapa m = new Mapa(5,5,nueva);
-            m.dibujarMapa(nueva);
+    public void cambiarCivilizacion(Civilizacion civ) {
+
+        if ("Griega".equals(civ.getNombre()) && !civ.isActiva()) {
+            civ.setActiva(true);
+            civ = listaCivilizaciones.get("Griega");
+            civilizacionActiva = civ.getNombre();
+            System.out.println("Ha cambiado a la civilizacion "+ civ.getNombre());
+        } else if ("Romana".equals(civ.getNombre()) && !civ.isActiva()) {
+            civ.setActiva(true);
+            civ =  listaCivilizaciones.get("Romana");
+            civilizacionActiva = civ.getNombre();            
+            System.out.println("Ha cambiado a la civilizacion "+ civ.getNombre());
+
         }
-        else if("Romana".equals(civ.getNombre()) && civ.isActiva()){
-            civ.setNombre(civilizacionActiva);
-            
-        } //FALTA ACABAR
-        
+        else System.out.println("La civilizacion a cambiar ya está activa");
+
+    }
+
     }
 }
