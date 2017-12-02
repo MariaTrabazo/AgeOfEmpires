@@ -30,127 +30,129 @@ public class Mapa {
     private int contadorCasas = 0;
     private int contadorCuarteles = 0;
 
-   public Mapa(int filas, int columnas, Civilizacion civ) {
+    public Mapa(int filas, int columnas) {
         miMapa = new ArrayList<>();
         listaPersonajes = new HashMap<>();
         listaEdificios = new HashMap<>();
         listaContenedores = new HashMap<>();
+        listaCivilizaciones = new HashMap<>();
         Personaje personaje1 = new Personaje("Paisano-1", "paisano");
+        Personaje personaje2 = new Personaje("Paisano-2", "paisano");
+        Civilizacion civilizacion1 = new Civilizacion("Griega", true);
+        Civilizacion civilizacion2 = new Civilizacion("Romana", false);
+        listaCivilizaciones.put(civilizacion1.getNombre(), civilizacion1);
+        listaCivilizaciones.put(civilizacion2.getNombre(), civilizacion2);
+        if (civilizacion1.isActiva()) {
+            civilizacionActiva = civilizacion1.getNombre();
+        } else if (civilizacion2.isActiva()) {
+            civilizacionActiva = civilizacion2.getNombre();
+        }
 
         for (int i = 0; i < filas; i++) {
             ArrayList<Celda> fila = new ArrayList<>();
             miMapa.add(fila);
             for (int j = 0; j < columnas; j++) {
                 Celda celdaAux = new Celda(i, j);
-                if ("Griega".equals(civ.getNombre())) {
-                    
-                    if (i == 0 && j == 1) {
-                        Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
+                if (i == 0 && j == 1) {
+                    Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
 
-                        Posicion p = new Posicion(i, j);
-                        edificio1.setPosicion(p);
-                        celdaAux.setTipo("ciudadela");
-                        celdaAux.setEdificio(edificio1);
-                        listaEdificios.put("Ciudadela-1", edificio1);
-                        civ.getEdificios().put("Ciudadela-1", edificio1);
-                    } else if (i == 2 && j == 2) {
-                        celdaAux.setTipo("pradera");
-                        Posicion p2 = new Posicion(i, j);
-                        personaje1.setPosicion(p2);
-                        celdaAux.setPersonaje(personaje1);
-                        listaPersonajes.put("Paisano-1", personaje1);
-                        civ.getPersonajes().put("Paisano-1", personaje1);
-                        //civ.setPersonajes(listaPersonajes);
+                    Posicion p = new Posicion(i, j);
+                    edificio1.setPosicion(p);
+                    celdaAux.setTipo("ciudadela");
+                    celdaAux.setEdificio(edificio1);
+                    listaEdificios.put("Ciudadela-1", edificio1);
+                    civilizacion1.getEdificios().put("Ciudadela-1", edificio1);
+                    edificio1.setCivilizacion(civilizacion1);
+                } else if (i == 1 && j == 2) {
+                    celdaAux.setTipo("pradera");
+                    Posicion p2 = new Posicion(i, j);
+                    personaje1.setPosicion(p2);
+                    celdaAux.setPersonaje(personaje1);
+                    listaPersonajes.put("Paisano-1", personaje1);
+                    civilizacion1.getPersonajes().put("Paisano-1", personaje1);
+                    personaje1.setCivilizacion(civilizacion1);
+                    if (civilizacion1.isActiva()) {
                         celdaAux.setVisible(true);
-                    } else if (i == 2 && j == 4) {
-                        ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
-                        Posicion p3 = new Posicion(i, j);
-                        contenedor1.setPosicion(p3);
-                        celdaAux.setTipo("arbusto");
-                        celdaAux.setContenedor(contenedor1);
-                        contadorArbustos++;
-                        listaContenedores.put("Arbusto-1", contenedor1);
-                    } else if (i == 3 && j == 2) {
-                        ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque-1", "bosque");
-                        Posicion p4 = new Posicion(i, j);
-                        contenedor2.setPosicion(p4);
-                        celdaAux.setTipo("bosque");
-                        celdaAux.setContenedor(contenedor2);
-                        listaContenedores.put("Bosque-1", contenedor2);
-                        contadorBosques++;
-                    } else if (i == 0 && j == 3) {
-                        ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera-1", "cantera");
-                        Posicion p4 = new Posicion(i, j);
-                        contenedor3.setPosicion(p4);
-                        celdaAux.setTipo("cantera");
-                        celdaAux.setContenedor(contenedor3);
-                        contadorCanteras++;
-                        listaContenedores.put("Cantera-1", contenedor3);
                     }
-                    
-                    fila.add(celdaAux);
-                } else if ("Romana".equals(civ.getNombre())) {
-                    
-                    if (i == 2 && j == 1) {
-                        Edificio edificio1 = new Edificio("Ciudadela-1", "ciudadela");
+                } else if (i == 1 && j == 4) {
+                    Edificio edificio2 = new Edificio("Ciudadela-2", "ciudadela");
 
-                        Posicion p = new Posicion(i, j);
-                        edificio1.setPosicion(p);
-                        celdaAux.setTipo("ciudadela");
-                        celdaAux.setEdificio(edificio1);
-                        listaEdificios.put("Ciudadela-1", edificio1);
-                        civ.getEdificios().put("Ciudadela-1", edificio1);
-                        //civ.setEdificios(listaEdificios);
-                    } else if (i == 3 && j == 3) {
-                        celdaAux.setTipo("pradera");
-                        Posicion p2 = new Posicion(i, j);
-                        personaje1.setPosicion(p2);
-                        celdaAux.setPersonaje(personaje1);
-                        listaPersonajes.put("Paisano-1", personaje1);
-                        civ.getPersonajes().put("Paisano-1", personaje1);
-                        //civ.setPersonajes(listaPersonajes);
+                    Posicion p = new Posicion(i, j);
+                    edificio2.setPosicion(p);
+                    celdaAux.setTipo("ciudadela");
+                    celdaAux.setEdificio(edificio2);
+                    listaEdificios.put("Ciudadela-2", edificio2);
+                    civilizacion2.getEdificios().put("Ciudadela-2", edificio2);
+                    edificio2.setCivilizacion(civilizacion2);
+                } else if (i == 3 && j == 3) {
+                    celdaAux.setTipo("pradera");
+                    Posicion p2 = new Posicion(i, j);
+                    personaje2.setPosicion(p2);
+                    celdaAux.setPersonaje(personaje2);
+                    listaPersonajes.put("Paisano-2", personaje2);
+                    civilizacion2.getPersonajes().put("Paisano-2", personaje2);
+                    personaje1.setCivilizacion(civilizacion2);
+                    if (civilizacion2.isActiva()) {
                         celdaAux.setVisible(true);
-                    } else if (i == 0 && j == 4) {
-                        ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
-                        Posicion p3 = new Posicion(i, j);
-                        contenedor1.setPosicion(p3);
-                        celdaAux.setTipo("arbusto");
-                        celdaAux.setContenedor(contenedor1);
-                        contadorArbustos++;
-                        listaContenedores.put("Arbusto-1", contenedor1);
-                    } else if (i == 1 && j == 2) {
-                        ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque-1", "bosque");
-                        Posicion p4 = new Posicion(i, j);
-                        contenedor2.setPosicion(p4);
-                        celdaAux.setTipo("bosque");
-                        celdaAux.setContenedor(contenedor2);
-                        listaContenedores.put("Bosque-1", contenedor2);
-                        contadorBosques++;
-                    } else if (i == 5 && j == 3) {
-                        ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera-1", "cantera");
-                        Posicion p4 = new Posicion(i, j);
-                        contenedor3.setPosicion(p4);
-                        celdaAux.setTipo("cantera");
-                        celdaAux.setContenedor(contenedor3);
-                        contadorCanteras++;
-                        listaContenedores.put("Cantera-1", contenedor3);
                     }
-
-                    fila.add(celdaAux);
-
+                } else if (i == 4 && j == 3) {
+                    ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
+                    Posicion p3 = new Posicion(i, j);
+                    contenedor1.setPosicion(p3);
+                    celdaAux.setTipo("arbusto");
+                    celdaAux.setContenedor(contenedor1);
+                    contadorArbustos++;
+                    listaContenedores.put("Arbusto-1", contenedor1);
+                } else if (i == 3 && j == 2) {
+                    ContenedoresRecurso contenedor2 = new ContenedoresRecurso("Bosque-1", "bosque");
+                    Posicion p4 = new Posicion(i, j);
+                    contenedor2.setPosicion(p4);
+                    celdaAux.setTipo("bosque");
+                    celdaAux.setContenedor(contenedor2);
+                    listaContenedores.put("Bosque-1", contenedor2);
+                    contadorBosques++;
+                } else if (i == 0 && j == 3) {
+                    ContenedoresRecurso contenedor3 = new ContenedoresRecurso("Cantera-1", "cantera");
+                    Posicion p4 = new Posicion(i, j);
+                    contenedor3.setPosicion(p4);
+                    celdaAux.setTipo("cantera");
+                    celdaAux.setContenedor(contenedor3);
+                    contadorCanteras++;
+                    listaContenedores.put("Cantera-1", contenedor3);
                 }
 
+                fila.add(celdaAux);
+
             }
+
         }
-        listaCivilizaciones.put(civ.getNombre(), civ);
-        Celda celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "NORTE");
-        celdaAuxAdyacente.setVisible(true);
-        celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "SUR");
-        celdaAuxAdyacente.setVisible(true);
-        celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "ESTE");
-        celdaAuxAdyacente.setVisible(true);
-        celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "OESTE");
-        celdaAuxAdyacente.setVisible(true);
+        if (civilizacion1.isActiva()) {
+
+            Celda celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "NORTE");
+            celdaAuxAdyacente.setVisible(true);
+            
+            celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "SUR"); 
+            celdaAuxAdyacente.setVisible(true);
+            
+            celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "ESTE");
+            celdaAuxAdyacente.setVisible(true);
+
+            celdaAuxAdyacente = devolverCeldaAdyacente(personaje1.getPosicion(), "OESTE");
+           celdaAuxAdyacente.setVisible(true);
+
+        } else if (civilizacion2.isActiva()) {
+            Celda celdaAuxAdyacente2 = devolverCeldaAdyacente(personaje2.getPosicion(), "NORTE");
+            celdaAuxAdyacente2.setVisible(true);
+
+            celdaAuxAdyacente2 = devolverCeldaAdyacente(personaje2.getPosicion(), "SUR");
+            celdaAuxAdyacente2.setVisible(true);
+
+            celdaAuxAdyacente2 = devolverCeldaAdyacente(personaje2.getPosicion(), "ESTE");
+            celdaAuxAdyacente2.setVisible(true);
+
+            celdaAuxAdyacente2 = devolverCeldaAdyacente(personaje2.getPosicion(), "OESTE");
+            celdaAuxAdyacente2.setVisible(true);
+        }
 
     }
 
