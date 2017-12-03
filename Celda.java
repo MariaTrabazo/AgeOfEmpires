@@ -124,5 +124,11 @@ public class Celda {
             System.out.println("La celda no está visible");
         }
     }
+        public Grupo agruparCelda() {
+
+        grupo.setPersonaje(personajes);
+        return grupo;
+    }
+
         
 }
