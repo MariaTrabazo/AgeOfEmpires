@@ -98,9 +98,9 @@ public class Mapa {
                     HashMap<String, Personaje> listaCelda=celdaAux.getListaPersonajes();
                     listaCelda.put(personaje2.getNombre(), personaje2);
                     celdaAux.setListaPersonajes(listaCelda);
-                    //if (civilizacion2.isActiva()) {
+                    if (civilizacion2.isActiva()) {
                         celdaAux.setVisible(false);
-                    //}
+                    }
                 } else if (i == 4 && j == 3) {
                     ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
                     Posicion p3 = new Posicion(i, j);
