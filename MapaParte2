@@ -68,9 +68,12 @@ public class Mapa {
                     Posicion p2 = new Posicion(i, j);
                     personaje1.setPosicion(p2);
                     personaje1.setCivilizacion(civilizacion1);
-                    celdaAux.setPersonaje(personaje1);
-                    civilizacion1.getPersonajes().put("Paisano-1", personaje1);
+                    //celdaAux.setPersonaje(personaje1);
+                    civilizacion1.getPersonajes().put(personaje1.getNombre(), personaje1);
                     listaPersonajes.put("Paisano-1", personaje1);
+                    HashMap<String, Personaje> listaCelda=celdaAux.getListaPersonajes();
+                    listaCelda.put(personaje1.getNombre(), personaje1);
+                    celdaAux.setListaPersonajes(listaCelda);
                     if (civilizacion1.isActiva()) {
                         celdaAux.setVisible(true);
                     }
@@ -89,12 +92,15 @@ public class Mapa {
                     Posicion p2 = new Posicion(i, j);
                     personaje2.setPosicion(p2);
                     personaje2.setCivilizacion(civilizacion2);
-                    celdaAux.setPersonaje(personaje2);
-                    civilizacion2.getPersonajes().put("Paisano-2", personaje2);
+                    //celdaAux.setPersonaje(personaje2);
+                    civilizacion2.getPersonajes().put(personaje2.getNombre(), personaje2);
                     listaPersonajes.put("Paisano-2", personaje2);
-                    if (civilizacion2.isActiva()) {
-                        celdaAux.setVisible(true);
-                    }
+                    HashMap<String, Personaje> listaCelda=celdaAux.getListaPersonajes();
+                    listaCelda.put(personaje2.getNombre(), personaje2);
+                    celdaAux.setListaPersonajes(listaCelda);
+                    //if (civilizacion2.isActiva()) {
+                        celdaAux.setVisible(false);
+                    //}
                 } else if (i == 4 && j == 3) {
                     ContenedoresRecurso contenedor1 = new ContenedoresRecurso("Arbusto-1", "arbusto");
                     Posicion p3 = new Posicion(i, j);
@@ -269,7 +275,7 @@ public class Mapa {
     }
 
    public void dibujarMapa() {
-
+       
         String devolverMapa = "\n";
         int columna = 0, fila;
 
@@ -279,17 +285,33 @@ public class Mapa {
                 if (celdaAuxiliar.isVisible() && "Griega".equals(civilizacionActiva.getNombre())) {
                     switch (celdaAuxiliar.getTipo()) {
                         case "pradera":
-                            if (celdaAuxiliar.getPersonaje() != null) {
-                                if (celdaAuxiliar.getPersonaje().getTipo().equals("paisano")) {
-                                    String[] personaje = celdaAuxiliar.getPersonaje().getNombre().split("-");
-                                    devolverMapa += "\t" + "P" + personaje[1];
-                                } else if (celdaAuxiliar.getPersonaje().getTipo().equals("soldado")) {
-                                    String[] personaje = celdaAuxiliar.getPersonaje().getNombre().split("-");
-                                    devolverMapa += "\t" + "S" + personaje[1];
+                            if (!celdaAuxiliar.getListaPersonajes().isEmpty()) {
+                                if (!celdaAuxiliar.getListaPersonajes().isEmpty()) {
+                            
+                                if(celdaAuxiliar.getListaPersonajes().size()>1){
+                                    devolverMapa += "\t" ;
                                 }
-                            } else {
+                                else{
+                                    Personaje personajeAuxiliar;
+                                    for(String key: celdaAuxiliar.getListaPersonajes().keySet()){
+                                       personajeAuxiliar=celdaAuxiliar.getListaPersonajes().get(key);
+                                       String[] personaje = personajeAuxiliar.getNombre().split("-");
+                                       if("paisano".equals(personajeAuxiliar.getTipo())){
+                                           devolverMapa += "\t" + "P" + personaje[1];
+                                       }
+                                       else{
+                                           devolverMapa += "\t" + "S" + personaje[1];
+                                       }
+                                    }
+                                }
+                                }
+                                
+                                
+                            }/*if (!celdaAuxiliar.getListaGrupos().isEmpty()) {
+                            
+                            }*/ else {
                                 devolverMapa += "\t" + "@";
-                            }
+                              }
                             break;
                         case "arbusto":
                             String[] arbustos = celdaAuxiliar.getContenedor().getNombre().split("-");
@@ -320,17 +342,29 @@ public class Mapa {
                 else if(celdaAuxiliar.isVisible() && "Romana".equals(civilizacionActiva.getNombre())) {//PONER COLORES PARA DIFERENCIARLOS
                     switch (celdaAuxiliar.getTipo()) {
                         case "pradera":
-                            if (celdaAuxiliar.getPersonaje() != null) {
-                                if (celdaAuxiliar.getPersonaje().getTipo().equals("paisano")) {
-                                    String[] personaje = celdaAuxiliar.getPersonaje().getNombre().split("-");
-                                    devolverMapa += "\t" + "P" + personaje[1];
-                                } else if (celdaAuxiliar.getPersonaje().getTipo().equals("soldado")) {
-                                    String[] personaje = celdaAuxiliar.getPersonaje().getNombre().split("-");
-                                    devolverMapa += "\t" + "S" + personaje[1];
+                            if (!celdaAuxiliar.getListaPersonajes().isEmpty()) {
+                                if(celdaAuxiliar.getListaPersonajes().size()>1){
+                                    devolverMapa += "\t" ;
                                 }
-                            } else {
+                                else{
+                                    Personaje personajeAuxiliar;
+                                    for(String key: celdaAuxiliar.getListaPersonajes().keySet()){
+                                       personajeAuxiliar=celdaAuxiliar.getListaPersonajes().get(key);
+                                       String[] personaje = personajeAuxiliar.getNombre().split("-");
+                                       if("paisano".equals(personajeAuxiliar.getTipo())){
+                                           devolverMapa += "\t" + "P" + personaje[1];
+                                       }
+                                       else{
+                                           devolverMapa += "\t" + "S" + personaje[1];
+                                       }
+                                    }
+                                }
+                                
+                            }/*if (!celdaAuxiliar.getListaGrupos().isEmpty()) {
+                            
+                            }*/ else {
                                 devolverMapa += "\t" + "@";
-                            }
+                              }
                             break;
                         case "arbusto":
                             String[] arbustos = celdaAuxiliar.getContenedor().getNombre().split("-");
@@ -859,7 +893,7 @@ public class Mapa {
 
     }
     
-    public void preguntarCivilizacionActia(){
+    public void preguntarCivilizacionActiva(){
         System.out.println("La civilizacion activa es: " + civilizacionActiva);
     }
     
