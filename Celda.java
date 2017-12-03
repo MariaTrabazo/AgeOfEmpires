@@ -79,27 +79,37 @@ public class Celda {
         
     }
     
-        public void describirCelda() {
+    public void describirCelda() {
 
-        if ("ciudadela".equals(tipo) || "casa".equals(tipo) || "cuartel".equals(tipo)) {
-            if (edificio != null) {
-                edificio.mirarEdificio();
-            }
-        } else if ("cantera".equals(tipo) || "bosque".equals(tipo) || "arbusto".equals(tipo)) {
-            if (contenedor != null) {
-                System.out.println(contenedor);
-            }
-
-        } else if ("pradera".equals(tipo)) {
-            if (personaje != null) {
-                if ("paisano".equals(personaje.getTipo()) || "soldado".equals(personaje.getTipo())) {
-
-                    personaje.mirarPersonaje();
-
+        if (visible == true) {
+            if ("ciudadela".equals(tipo) || "casa".equals(tipo) || "cuartel".equals(tipo)) {
+                if (edificio != null) {
+                    edificio.mirarEdificio();
                 }
-            } else {
-                System.out.println("Celda de tipo pardera");
+            } else if ("cantera".equals(tipo) || "bosque".equals(tipo) || "arbusto".equals(tipo)) {
+                if (contenedor != null) {
+                    System.out.println(contenedor);
+                }
+
+            } else if ("pradera".equals(tipo)) {
+                if (personaje != null) {
+                    if ("personaje".equals(personaje.getTipo()) || "soldado".equals(personaje.getTipo())) {
+
+                        Iterator<Personaje> persona = personajes.values().iterator();
+                        while (persona.hasNext()) {
+                            Personaje personas = persona.next();
+                            personas.mirarPersonaje();
+                        }
+
+                    }
+
+                } else {
+                    System.out.println("Celda de tipo pardera");
+                }
+
             }
+        } else {
+            System.out.println("La celda no está visible");
         }
     }
     
