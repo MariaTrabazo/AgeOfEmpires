@@ -14,13 +14,16 @@ public class Celda {
    private Posicion posicion;
     private ContenedoresRecurso contenedor;
     private Edificio edificio;
+    private HashMap<String, Personaje> personajes;
     private Personaje personaje;
     private String tipo;
+    private boolean visible;
 
    public Celda() {
         this.posicion = new Posicion();
         this.contenedor = null;
         this.personaje = null;
+        this.personajes = new HashMap();
         this.edificio = null;
         this.tipo = "pradera";
     }
@@ -29,6 +32,7 @@ public class Celda {
         this.posicion = new Posicion(x, y);
         this.contenedor = null;
         this.personaje = null;
+        this.personajes = new HashMap();
         this.edificio = null;
         this.tipo = "pradera";
     }   
@@ -52,6 +56,10 @@ public class Celda {
     public String getTipo() {
         return tipo;
     }
+    
+    public HashMap<String, Personaje> getPersonajes() {
+        return personajes;
+    }
 
     public void setPosicion(Posicion posicion) {
         this.posicion = posicion;
@@ -67,6 +75,10 @@ public class Celda {
 
     public void setPersonaje(Personaje personaje) {
         this.personaje = personaje;
+    }
+    
+    public void setPersonajes(HashMap<String, Personaje> personajes) {
+        this.personajes = personajes;
     }
 
     public void setTipo(String tipo) {
