@@ -105,7 +105,7 @@ public class Celda {
 
             } else if ("pradera".equals(tipo)) {
                 if (personaje != null) {
-                    if ("personaje".equals(personaje.getTipo()) || "soldado".equals(personaje.getTipo())) {
+                    if ("paisano".equals(personaje.getTipo()) || "soldado".equals(personaje.getTipo())) {
 
                         Iterator<Personaje> persona = personajes.values().iterator();
                         while (persona.hasNext()) {
@@ -124,6 +124,5 @@ public class Celda {
             System.out.println("La celda no está visible");
         }
     }
-    
         
 }
