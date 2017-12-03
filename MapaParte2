@@ -898,7 +898,7 @@ public class Mapa {
         System.out.println("La civilizacion activa es: " + civilizacionActiva);
     }
 
-    public void cambiarCivilizacion(Civilizacion civ) {
+    /*public void cambiarCivilizacion(Civilizacion civ) {
 
         if ("Griega".equals(civ.getNombre()) && !civ.isActiva()) {
             civ.setActiva(true);
@@ -915,6 +915,21 @@ public class Mapa {
             System.out.println("La civilizacion a cambiar ya está activa");
         }
 
+    }*/
+    
+    public void cambiarCivilizacion(Civilizacion civilizacion){
+        if(!"Griega".equals(civilizacion.getNombre()) && !"Romana".equals(civilizacion.getNombre())){
+            System.out.println("No es una de las civilizaciones existentes.");
+        }
+        else{
+            if(civilizacionActiva.equals(civilizacion)){
+                System.out.println("Esa civilizacion ya esta activa.");
+            }
+            else{
+               civilizacionActiva=civilizacion; 
+               System.out.println("Ha cambiado a la civilizacion "+civilizacionActiva.getNombre());
+            }
+        }
     }
 
     public void agrupar(Posicion posicion) {
