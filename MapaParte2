@@ -20,7 +20,7 @@ public class Mapa {
     private HashMap<String, Edificio> listaEdificios;
     private HashMap<String, ContenedoresRecurso> listaContenedores;
     private HashMap<String, Civilizacion> listaCivilizaciones;
-    private String civilizacionActiva;
+    private Civilizacion civilizacionActiva;
     private int contadorCiudadelas;
     private int contadorBosques;
     private int contadorArbustos;
@@ -42,10 +42,10 @@ public class Mapa {
         Civilizacion civilizacion2 = new Civilizacion("Romana", false);
         listaCivilizaciones.put(civilizacion1.getNombre(), civilizacion1);
         listaCivilizaciones.put(civilizacion2.getNombre(), civilizacion2);
-        if (civilizacion1.isActiva()) {
-            civilizacionActiva = civilizacion1.getNombre();
+       if (civilizacion1.isActiva()) {
+            civilizacionActiva = civilizacion1;
         } else if (civilizacion2.isActiva()) {
-            civilizacionActiva = civilizacion2.getNombre();
+            civilizacionActiva = civilizacion2;
         }
 
         for (int i = 0; i < filas; i++) {
@@ -58,19 +58,19 @@ public class Mapa {
 
                     Posicion p = new Posicion(i, j);
                     edificio1.setPosicion(p);
+                    edificio1.setCivilizacion(civilizacion1);
                     celdaAux.setTipo("ciudadela");
                     celdaAux.setEdificio(edificio1);
-                    listaEdificios.put("Ciudadela-1", edificio1);
                     civilizacion1.getEdificios().put("Ciudadela-1", edificio1);
-                    edificio1.setCivilizacion(civilizacion1);
+                    listaEdificios.put("Ciudadela-1", edificio1);
                 } else if (i == 1 && j == 2) {
                     celdaAux.setTipo("pradera");
                     Posicion p2 = new Posicion(i, j);
                     personaje1.setPosicion(p2);
-                    celdaAux.setPersonaje(personaje1);
-                    listaPersonajes.put("Paisano-1", personaje1);
-                    civilizacion1.getPersonajes().put("Paisano-1", personaje1);
                     personaje1.setCivilizacion(civilizacion1);
+                    celdaAux.setPersonaje(personaje1);
+                    civilizacion1.getPersonajes().put("Paisano-1", personaje1);
+                    listaPersonajes.put("Paisano-1", personaje1);
                     if (civilizacion1.isActiva()) {
                         celdaAux.setVisible(true);
                     }
@@ -79,19 +79,19 @@ public class Mapa {
 
                     Posicion p = new Posicion(i, j);
                     edificio2.setPosicion(p);
+                    edificio2.setCivilizacion(civilizacion2);
                     celdaAux.setTipo("ciudadela");
                     celdaAux.setEdificio(edificio2);
-                    listaEdificios.put("Ciudadela-2", edificio2);
                     civilizacion2.getEdificios().put("Ciudadela-2", edificio2);
-                    edificio2.setCivilizacion(civilizacion2);
+                    listaEdificios.put("Ciudadela-2", edificio2);
                 } else if (i == 3 && j == 3) {
                     celdaAux.setTipo("pradera");
                     Posicion p2 = new Posicion(i, j);
                     personaje2.setPosicion(p2);
+                    personaje2.setCivilizacion(civilizacion2);
                     celdaAux.setPersonaje(personaje2);
-                    listaPersonajes.put("Paisano-2", personaje2);
                     civilizacion2.getPersonajes().put("Paisano-2", personaje2);
-                    personaje1.setCivilizacion(civilizacion2);
+                    listaPersonajes.put("Paisano-2", personaje2);
                     if (civilizacion2.isActiva()) {
                         celdaAux.setVisible(true);
                     }
@@ -208,7 +208,7 @@ public class Mapa {
         return listaCivilizaciones;
     }
 
-    public String getCivilizacionActiva() {
+    public Civilizacion getCivilizacionActiva() {
         return civilizacionActiva;
     }
 
@@ -264,11 +264,11 @@ public class Mapa {
         this.listaCivilizaciones = listaCivilizaciones;
     }
 
-    public void setCivilizacionActiva(String civilizacionActiva) {
+    public void setCivilizacionActiva(Civilizacion civilizacionActiva) {
         this.civilizacionActiva = civilizacionActiva;
     }
 
-   public void dibujarMapa(Civilizacion civ) {
+   public void dibujarMapa() {
 
         String devolverMapa = "\n";
         int columna = 0, fila;
@@ -276,7 +276,7 @@ public class Mapa {
         for (fila = 0; fila < miMapa.size(); fila++) {
             for (columna = 0; columna < miMapa.get(0).size(); columna++) {
                 Celda celdaAuxiliar = miMapa.get(fila).get(columna);
-                if (celdaAuxiliar.isVisible() && "Griega".equals(civ.getNombre())) {
+                if (celdaAuxiliar.isVisible() && "Griega".equals(civilizacionActiva.getNombre())) {
                     switch (celdaAuxiliar.getTipo()) {
                         case "pradera":
                             if (celdaAuxiliar.getPersonaje() != null) {
@@ -317,7 +317,7 @@ public class Mapa {
                             break;
                     }
                 }
-                else if(celdaAuxiliar.isVisible() && "Romana".equals(civ.getNombre())) {//PONER COLORES PARA DIFERENCIARLOS
+                else if(celdaAuxiliar.isVisible() && "Romana".equals(civilizacionActiva.getNombre())) {//PONER COLORES PARA DIFERENCIARLOS
                     switch (celdaAuxiliar.getTipo()) {
                         case "pradera":
                             if (celdaAuxiliar.getPersonaje() != null) {
@@ -456,8 +456,10 @@ public class Mapa {
         if (celdaAdyacente != null) {
             if ("pradera".equals(celdaAdyacente.getTipo()) && celdaAdyacente.getPersonaje() == null) {
                 miMapa.get(personaje.getPosicion().getX()).get(personaje.getPosicion().getY()).setPersonaje(null);
+                miMapa.get(personaje.getPosicion().getX()).get(personaje.getPosicion().getY()).getPersonajes().remove(personaje.getNombre());
                 personaje.setPosicion(celdaAdyacente.getPosicion());
                 celdaAdyacente.setPersonaje(personaje);
+                celdaAdyacente.getPersonajes().put(personaje.getNombre(), personaje);
 
                 Celda celdaAuxAdyacente = devolverCeldaAdyacente(personaje.getPosicion(), "NORTE");
                 if (celdaAuxAdyacente != null) {
