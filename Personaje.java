@@ -185,19 +185,23 @@ public class Personaje {
         }
     }
      
-     public void mirarPersonaje(){
-        if("paisano".equals(tipo)){
+
+    public void mirarPersonaje() {
+        if ("paisano".equals(tipo)) {
             System.out.println("Celda de tipo paisano");
+            System.out.println("Es el " +nombre);
             System.out.println("El ataque es " + ataque);
             System.out.println("La armadura es " + armadura);
-            System.out.println("Los puntos de saludo son " + salud);
+            System.out.println("Los puntos de salud son " + salud);
             System.out.println("La capadidad de recoleccion es " + capacidadRecoleccion);
-        }
-        else if("soldado".equals(tipo)){
+            System.out.println("Es de la civilizacion " + civilizacion.getNombre());
+        } else if ("soldado".equals(tipo)) {
             System.out.println("Celda de tipo soldado");
+            System.out.println("Es el " +nombre);
             System.out.println("El ataque es " + ataque);
             System.out.println("La armadura es " + armadura);
-            System.out.println("Los puntos de saludo son " + salud);
+            System.out.println("Los puntos de salud son " + salud);
+            System.out.println("Es de la civilizacion " + civilizacion.getNombre());
         }
     }
     
