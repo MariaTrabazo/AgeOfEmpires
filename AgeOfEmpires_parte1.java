@@ -192,7 +192,32 @@ public class AgeOfEmpires_parte2 {
                     Posicion posicion = new Posicion(Character.getNumericValue(pos.charAt(1)), Character.getNumericValue(pos.charAt(3)));
                     mapaPrueba.agrupar(posicion);
                 }
-                break;  
+                break; 
+                    
+               case "desagrupar":
+                    if(comando.length!=2){
+                       System.out.println("Error de sintaxis."); 
+                    }
+                    else{
+                        Grupo grupoAux = mapaPrueba.devolverGrupo(comando[1]);
+                        if(grupoAux!=null){
+                            mapaPrueba.desagrupar(grupoAux);
+                            Celda celdaAux=(mapaPrueba.devolverCelda(grupoAux.getPosicion())); 
+                            HashMap <String, Grupo> listaPC =mapaPrueba.getListaGrupos();
+                            Personaje pAux;
+                            for (String key :grupoAux.getPersonaje().keySet()) {           
+                                pAux = grupoAux.getPersonaje().get(key);
+                                celdaAux.getPersonajes().put(pAux.getNombre(), pAux);
+                             }     
+                            grupoAux.getPersonaje().clear();
+                            mapaPrueba.setListaGrupos(listaPC);
+                            mapaPrueba.getListaGrupos().remove(grupoAux.getNombre());
+                            mapaPrueba.dibujarMapa();  
+                        }
+                         
+                        
+                    }
+                    break;
 
             }
         }
