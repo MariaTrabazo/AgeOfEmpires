@@ -972,4 +972,54 @@ public class Mapa {
         }
 
     }
+    
+    public void desligar(Personaje personaje, Grupo grupo){
+        Posicion posicion = new Posicion();
+        Celda celdaAux= devolverCelda(posicion);
+        HashMap <String, Personaje> listaAux =grupo.getPersonaje();
+        HashMap <String, Personaje> listaAux2 =grupo.getPersonaje();
+        HashMap <String, Personaje> lAux = celdaAux.getPersonajes();
+        Personaje pAux;
+        if (personaje.getGrupo().equals(grupo.getNombre())){
+            if(!listaAux.isEmpty() && listaAux.size()>2){
+                for (String key :listaAux.keySet()) {           
+                   pAux = listaAux.get(key);
+                   if(pAux.getCivilizacion().equals(civilizacionActiva) && pAux.getGrupo()!=null && pAux.getNombre().equals(personaje.getNombre())){
+                       pAux.setGrupo(null);
+                       //soldado.setGrupo(null);
+                       listaAux2.remove(pAux.getNombre(), pAux);
+                       grupo.setAtaque(grupo.getAtaque() - pAux.getAtaque());
+                       grupo.setArmadura(grupo.getArmadura() - pAux.getArmadura());
+                       lAux.put(pAux.getNombre(), pAux);
+
+                    }
+                }
+
+               grupo.setPersonaje(listaAux);
+               celdaAux.setListaPersonajes(lAux);
+            } 
+        }
+        else{
+            System.out.println("El personaje "+personaje.getNombre()+"no pertenece al "+grupo.getNombre()+".");
+        }
+    }
+      
+    public void desagrupar(Grupo grupo){
+        Posicion posicion = new Posicion();
+        Celda celdaAux= devolverCelda(posicion);
+        HashMap <String, Grupo> listaG = listaGrupos;
+        HashMap <String, Personaje> listaAux =grupo.getPersonaje();
+        HashMap <String, Personaje> lAux = celdaAux.getPersonajes();
+        Personaje pAux;
+        if(!listaAux.isEmpty() && listaAux.size()>2){
+            for (String key :listaAux.keySet()) {           
+               pAux = listaAux.get(key);
+               pAux.setGrupo(null);
+               lAux.put(pAux.getNombre(), pAux);
+            }     
+        }
+        listaG.remove(grupo.getNombre());
+        celdaAux.setListaPersonajes(lAux);
+        listaGrupos=listaG;
+    }
 }
