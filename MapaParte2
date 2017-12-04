@@ -482,6 +482,17 @@ public class Mapa {
         }
         return null;
     }
+    
+    public Grupo devolverGrupo(String nombre) {
+        Grupo grupoAux = null;
+        for (String key : listaGrupos.keySet()) {
+            grupoAux = listaGrupos.get(key);
+            if (grupoAux.getNombre().equals(nombre)) {
+                return grupoAux;
+            }
+        }
+        return null;
+    }
 
     public void mover(Personaje personaje, String direccion) {
         Celda celdaAdyacente = devolverCeldaAdyacente(personaje.getPosicion(), direccion);
