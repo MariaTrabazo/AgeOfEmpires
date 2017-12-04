@@ -184,8 +184,16 @@ public class AgeOfEmpires_parte2 {
                         mapaPrueba.preguntarCivilizacionActiva();
                     }
                     break;
-                    
-                    
+              case "agrupar":
+                if (comando.length != 2) {
+                    System.out.println("El numero de parametros pasados es incorrecto");
+                } else {
+                    String pos = comando[1];
+                    Posicion posicion = new Posicion(Character.getNumericValue(pos.charAt(1)), Character.getNumericValue(pos.charAt(3)));
+                    mapaPrueba.agrupar(posicion);
+                }
+                break;  
+
             }
         }
 
